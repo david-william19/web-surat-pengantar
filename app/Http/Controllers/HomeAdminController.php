@@ -13,7 +13,6 @@ class HomeAdminController extends Controller
 
         $widget= [
         ];
-        // return $widget;
         return view('admin.dashboard.home')->with(compact('widget'));
     }
 }

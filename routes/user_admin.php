@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 //nanti dikasih middleware, hehe, sekarang belom -Henry
 
-
 Route::get('/news/{id}/edit','NewsController@viewNewsEdit');
 Route::post('/news/{id}/edit','NewsController@update');
 Route::post('/news/store','NewsController@store');
@@ -31,8 +30,6 @@ Route::post('/rt/{id}/admin_change_password','RTAdminController@adminChangePassw
 
 
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
-    Route::view('/data/santri/import','admin.santri.import');
-    Route::view('/data/guru/import','admin.guru.import');
 
     Route::get('/news/create','NewsController@viewAdminCreate');
     Route::get('/news/manage','NewsController@viewAdminManage');

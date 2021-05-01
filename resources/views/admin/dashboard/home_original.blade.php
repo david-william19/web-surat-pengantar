@@ -16,11 +16,7 @@
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
-                <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                    <option selected>Aug 19</option>
-                    <option value="1">July 19</option>
-                    <option value="2">Jun 19</option>
-                </select>
+              
             </div>
         </div>
     </div>
@@ -49,7 +45,7 @@
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h2 class="text-dark mb-1 font-weight-medium">{{ $widget['countSantri'] }}</h2>
+                                <h2 class="text-dark mb-1 font-weight-medium"></h2>
                                 {{-- <span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span> --}}
                             </div>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Jumlah Santri</h6>
@@ -64,7 +60,7 @@
                 <div class="card-body">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
-                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium">{{ $widget['countSMP'] }}</h2>
+                            <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"></h2>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMP
                             </h6>
                         </div>
@@ -79,7 +75,7 @@
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
                             <div class="d-inline-flex align-items-center">
-                                <h2 class="text-dark mb-1 font-weight-medium">{{ $widget['countSMA'] }}</h2>
+                                <h2 class="text-dark mb-1 font-weight-medium"></h2>
                                 {{-- <span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span> --}}
                             </div>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">SANTRI SMA</h6>
@@ -94,7 +90,7 @@
                 <div class="card-body">
                     <div class="d-flex d-lg-flex d-md-block align-items-center">
                         <div>
-                            <h2 class="text-dark mb-1 font-weight-medium">{{ $widget['countAgenda'] }}</h2>
+                            <h2 class="text-dark mb-1 font-weight-medium"></h2>
                             <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Agenda Mutabaah</h6>
                         </div>
                         <div class="ml-auto mt-md-3 mt-lg-0">
@@ -120,17 +116,17 @@
                             <li>
                                 <i class="fas fa-circle text-primary font-10 mr-2"></i>
                                 <span class="text-muted">Seluruh Santri</span>
-                                <span class="text-dark float-right font-weight-medium">{{ $widget['countSantri'] }}</span>
+                                <span class="text-dark float-right font-weight-medium"></span>
                             </li>
                             <li class="mt-3">
                                 <i class="fas fa-circle text-danger font-10 mr-2"></i>
                                 <span class="text-muted">SMP</span>
-                                <span class="text-dark float-right font-weight-medium">{{$widget['countSMP']}}</span>
+                                <span class="text-dark float-right font-weight-medium"></span>
                             </li>
                             <li class="mt-3">
                                 <i class="fas fa-circle text-cyan font-10 mr-2"></i>
                                 <span class="text-muted">SMA</span>
-                                <span class="text-dark float-right font-weight-medium">{{$widget['countSMA']}}</span>
+                                <span class="text-dark float-right font-weight-medium"></span>
                             </li>
                         </ul>
                     </div>
@@ -182,5 +178,5 @@
 @endsection
 
 @section('app-script')
-    @include('admin.dashboard.script')
+    {{-- @include('admin.dashboard.script') --}}
 @endsection

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Daily Mutaba'ah</title>
+    <title>{{config('app.name')}}</title>
     <!-- Custom CSS -->
     <link href="{{ URL::to('bootstrap_ui') }}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">

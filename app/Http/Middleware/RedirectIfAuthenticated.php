@@ -25,12 +25,9 @@ class RedirectIfAuthenticated
             if (Auth::guard("admin")->check()) {
                 return redirect('/admin');
             }
-            if (Auth::guard("guru")->check()) {
-                return redirect("/guru");
-            }
-            if (Auth::guard("santri")->check()) {
-                return redirect("/santri");
-            }
+            // if (Auth::guard("warga")->check()) {
+            //     return redirect("/warga");
+            // }
         }
 
         return $next($request);

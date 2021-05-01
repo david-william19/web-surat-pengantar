@@ -17,7 +17,6 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-
         if(Auth::guard('admin')->check()){
 
         }else{

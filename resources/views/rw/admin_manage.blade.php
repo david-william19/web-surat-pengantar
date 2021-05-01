@@ -320,12 +320,6 @@
                 })
             });
 
-            // Reset Password
-            $('body').on("click", ".btn-res-pass", function() {
-                var id = $(this).attr("id")
-                $(".btn-reset").attr("id", id)
-                $("#reset-password-modal").modal("show")
-            });
 
         });
 
@@ -413,32 +407,6 @@
             });
         })
 
-
-        $(".btn-reset").on("click", function() {
-            var id = $(this).attr("id")
-            console.log(id);
-            $.ajax({
-                url: "{{ URL::to('/') }}/news/" + id + "/delete",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": {{ Auth::guard('admin')->user()->id }},
-                    "id": id,
-                },
-                method: "POST",
-                success: function(response) {
-                    console.log(response);
-                    $("#edit-modal").modal("hide")
-                    $('#table_data').DataTable().ajax.reload();
-                    swal("Sukses", "Berhasil Mengupdate Password Santri ", "success");
-                },
-                error: function(xhr, error, code) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(error);
-                    console.log(err);
-                    swal("Error", "Gagal Mengupdate Password Santri ", "error");
-                }
-            });
-        })
 
     </script>
 

@@ -48,7 +48,6 @@
                                     <th>No</th>
                                     <th>Kode RW</th>
                                     <th>Kontak RW</th>
-                                    <th>Username RW</th>
                                     <th>Jumlah RT Anggota</th>
                                     <th>Edit</th>
                                 </tr>
@@ -179,11 +178,6 @@
                             <input type="" required="" id="txt_in_kode" placeholder="Misal RW 05" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="name">Username Akun Ketua RW</label>
-                            <input type="" required="" id="txt_in_username" placeholder="Username Akun Ketua RW"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
                             <label for="name">Kontak RW</label>
                             <input type="" required="" id="txt_in_contact" placeholder="Kontak RW" class="form-control">
                         </div>
@@ -273,10 +267,6 @@
                         name: 'kontak'
                     },
                     {
-                        data: 'username',
-                        name: 'username'
-                    },
-                    {
                         data: 'rt',
                         name: 'rt'
                     },
@@ -329,11 +319,10 @@
 
 
             let in_kode = $('#txt_in_kode').val();
-            let in_username = $('#txt_in_username').val();
             let in_password = $('#txt_in_password').val();
             let in_contact = $('#txt_in_contact').val();
 
-            const myInput = [in_kode, in_username, in_contact, in_password];
+            const myInput = [in_kode,  in_contact, in_password];
 
             if (myInput.includes(null) || myInput.includes(undefined) || myInput.includes("")) {
                 in_error = true;
@@ -349,7 +338,6 @@
                         "_token": "{{ csrf_token() }}",
                         "kode": in_kode,
                         "contact": in_contact,
-                        "username": in_username,
                         "password": in_password,
                     },
                     method: "POST",

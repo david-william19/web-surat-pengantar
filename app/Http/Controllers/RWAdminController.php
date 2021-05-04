@@ -48,7 +48,6 @@ class RWAdminController extends Controller
         $object = new RukunWarga();
         $object->kode = $request->kode;
         $object->kontak = $request->contact;
-        $object->username = $request->username;
         $object->status = "active";
         $object->password = bcrypt($request->password);
         $object->save();
@@ -75,7 +74,6 @@ class RWAdminController extends Controller
     {
         $rules = [
             "kode" => "required",
-            "username" => "required",
             "contact" => "required",
         ];
         $customMessages = [
@@ -86,7 +84,6 @@ class RWAdminController extends Controller
 
         $object = RukunWarga::findOrFail($id);
         $object->kode = $request->kode;
-        $object->username = $request->username;
         $object->kontak = $request->contact;
         $object->save();
 

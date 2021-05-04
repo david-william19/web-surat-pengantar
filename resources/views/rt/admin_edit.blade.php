@@ -52,13 +52,6 @@
                         </div>
                         
                         <div class="form-group">
-                          <label for="">Username RW</label>
-                          <input type="text"
-                            class="form-control" name="username" value="{{$rw->username}}" id=""  placeholder="">
-                          <small class="form-text text-muted">Username Untuk Login</small>
-                        </div>
-
-                        <div class="form-group">
                           <label for="">Kontak RW</label>
                           <input type="text"
                             class="form-control" name="contact" value="{{$rw->kontak}}" id=""  placeholder="">

@@ -16,7 +16,6 @@ class CreateRukunWargasTable extends Migration
         Schema::create('rukun_warga', function (Blueprint $table) {
             $table->id();
             $table->string('kode')->unique();
-            $table->string('username');
             $table->string('password');
             $table->string('kontak');
             $table->string('status')->nullable();

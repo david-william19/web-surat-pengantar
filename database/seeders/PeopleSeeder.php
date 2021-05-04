@@ -14,12 +14,12 @@ class PeopleSeeder extends Seeder
      */
     public function run()
     {
-        $this->insertUser("Razky Febriansyah","itsrazky","1202184200","razkyfeb@gmail.com","bandungJS","1","088223738700","");
-        $this->insertUser("Ahmad Syakir","ahmadsyakir","1202184201","ahmadsyakir@gmail.com","bandungJS","1","088223738701","");
-        $this->insertUser("Fauzy Kurnain","fauzykurnain","1202184202","fauzykurnain@gmail.com","bandungJS","1","088223738702","");
-        $this->insertUser("Tiara Khadijah","arayarayar","1202184203","ara@gmail.com","bandungJS","1","088223738703","");
-        $this->insertUser("Zafira Chaerunnisa","zafirachr","1202184204","zafirachr@gmail.com","bandungJS","2","088223738704","");
-        $this->insertUser("Ghina Khaerunnisa","ghinakhrn","1202184205","ghinakhrn@gmail.com","bandungJS","2","088223738705","");        
+        // $this->insertUser("Razky Febriansyah","itsrazky","1202184200","razkyfeb@gmail.com","bandungJS","1","088223738700","");
+        // $this->insertUser("Ahmad Syakir","ahmadsyakir","1202184201","ahmadsyakir@gmail.com","bandungJS","1","088223738701","");
+        // $this->insertUser("Fauzy Kurnain","fauzykurnain","1202184202","fauzykurnain@gmail.com","bandungJS","1","088223738702","");
+        // $this->insertUser("Tiara Khadijah","arayarayar","1202184203","ara@gmail.com","bandungJS","1","088223738703","");
+        // $this->insertUser("Zafira Chaerunnisa","zafirachr","1202184204","zafirachr@gmail.com","bandungJS","2","088223738704","");
+        // $this->insertUser("Ghina Khaerunnisa","ghinakhrn","1202184205","ghinakhrn@gmail.com","bandungJS","2","088223738705","");        
 
     }
 

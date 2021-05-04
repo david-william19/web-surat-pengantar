@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Bandung JS</title>
+    <title>{{config('app.name')}}</title>
     <!-- Custom CSS -->
     <link href="{{ URL::to('/bootstrap_ui/') }}/dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,6 +48,26 @@
             height: 98% !important;
         }
 
+        .background-image {
+            background-image: url('https://image.freepik.com/free-vector/mandala-illustration_53876-81805.jpg');
+            margin: 0;
+            background-repeat: no-repeat;
+            position: fixed;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 0;
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-size: cover;
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            -o-filter: blur(2px);
+            -ms-filter: blur(2px);
+            filter: blur(2px);
+        }
 
         .auth-box {
             z-index: 300;
@@ -88,18 +108,18 @@
             <div class="background-image"></div>
 
             <div class="auth-box row round-all">
-                <div class="col-lg-7 miii col-md-5 modal-bg-img round-top-left round-bottom-left"
-                    style="background-image: url({{ URL::to('/bootstrap_ui/') }}/assets/images/cover.jpg);">
-                </div>
-                <div class="col-lg-5 col-md-7 bg-white round-top-right round-bottom-right">
+                {{-- <div class="col-lg-5 miii col-md-5 modal-bg-img round-top-left round-bottom-left"
+                    style="background-image: url({{ URL::to('/bootstrap_ui/') }}/assets/images/main_cover.jpg);">
+                </div> --}}
+                <div class="col-lg-12 col-md-7 bg-white round-all">
                     <div class="p-3">
                         <div class="text-center">
-                            <img width="150px" height="170px"
-                                src="{{ URL::to('/bootstrap_ui/') }}/assets/images/big_logo.png" alt="wrapkit">
+                            <img width="150px" height="150px"
+                            src="{{ URL::to('/bootstrap_ui/') }}/assets/images/big_logo.png" alt="wrapkit">
                         </div>
-                        <h2 class="mt-3 text-center">Sign In</h2>
-                        <p class="text-center">Admin Kelurahan Citereup</p>
-                        <form class="mt-4" action="{{ url('/login/admin/proc') }}" method="post">
+                        <h2 class="mt-3 text-center">Kelurahan Citereup</h2>
+                        <p class="text-center">Registrasi Kelapa Keluarga</p>
+                        <form class="mt-4" action="{{ url('/santri/storeSelf') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @if (session()->has('error'))
@@ -120,14 +140,48 @@
 
                             @endif
 
+
                             <div class="row">
+                                <div class="col-md-12">
+                                    @include('components.message')
+                                </div>
+
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">Email Admin</label>
-                                        <input class="form-control  @error('email') is-invalid @enderror" id="uname"
-                                            name="email" type="text" placeholder="Email">
+                                        <label class="text-dark" for="uname">Nama Keluarga</label>
+                                        <input required class="form-control  @error('nama') is-invalid @enderror" id="uname"
+                                            name="nama" type="text" placeholder="Masukkan Nama Lengkap">
                                     </div>
                                 </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="text-dark" for="uname">Kontak</label>
+                                        <input required class="form-control  @error('kontak') is-invalid @enderror" 
+                                            name="kontak" type="text" placeholder="Masukkan Nama">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="text-dark" for="uname">Kelas</label>
+                                        <input required class="form-control  @error('class') is-invalid @enderror" 
+                                            name="class" type="text" placeholder="Masukkan Kelas">
+                                            <small>Tanpa Spasi , Kapital misal : SI-42-06</small>
+                                        </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                      <label for="">Foto</label>
+                                      <input type="file" required class="form-control-file" name="photo" id="" placeholder="" aria-describedby="fileHelpId">
+                                      <small id="fileHelpId" class="form-text text-muted">Foto Profil</small>
+                                    </div>
+                                </div>
+
+                              
+                              
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="text-dark" for="pwd">Password</label>
@@ -141,11 +195,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn btn-block btn-dark">Sign In</button>
+                                    <button type="submit" class="btn btn-block btn-dark">Registrasi</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                   Kelurahan Citereup © {{ \Carbon\Carbon::now()->year }} <br>
-                                    <a href="{{ url('/login/kepala-keluarga') }}"><small>Klik Disini Untuk Login Kepala Keluarga</small></a>
+                                    Dept Kaderisasi <br> Badan Mentoring © {{ \Carbon\Carbon::now()->year }} <br>
+                                    <a href="{{url('/login')}}"><small>Klik Disini Untuk Login</small></a>
                                 </div>
                             </div>
                         </form>
@@ -184,7 +238,11 @@
             console.log('callback - particles.js config loaded');
         });
 
+        
+
     </script>
+
+    
 
 </body>
 

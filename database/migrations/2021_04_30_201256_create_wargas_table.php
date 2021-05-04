@@ -13,10 +13,10 @@ class CreateWargasTable extends Migration
      */
     public function up()
     {
-        Schema::create('wargas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        // Schema::create('wargas', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -26,6 +26,6 @@ class CreateWargasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wargas');
+        // Schema::dropIfExists('wargas');
     }
 }

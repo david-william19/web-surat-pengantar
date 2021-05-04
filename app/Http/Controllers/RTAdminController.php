@@ -51,7 +51,6 @@ class RTAdminController extends Controller
         $object = new RukunTetangga();
         $object->kode = $request->kode;
         $object->kontak = $request->contact;
-        $object->username = $request->username;
         $object->id_rw = $request->id_rw;
         $object->status = "active";
         $object->password = bcrypt($request->password);
@@ -80,7 +79,6 @@ class RTAdminController extends Controller
 
         $rules = [
             "kode" => "required",
-            "username" => "required",
             "contact" => "required",
             "id_rw" => "required",
         ];
@@ -92,7 +90,6 @@ class RTAdminController extends Controller
 
         $object = RukunTetangga::findOrFail($id);
         $object->kode = $request->kode;
-        $object->username = $request->username;
         $object->id_rw = $request->id_rw;
         $object->kontak = $request->contact;
         $object->save();

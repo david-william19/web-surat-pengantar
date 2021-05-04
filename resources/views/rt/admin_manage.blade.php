@@ -49,7 +49,6 @@
                                     <th>Kode RT</th>
                                     <th>Kontak RT</th>
                                     <th>Anggota dari RW</th>
-                                    <th>Username Login RT</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -190,11 +189,7 @@
                                 @endforelse
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="name">Username Untuk Login Pengurus RT</label>
-                            <input type="" required="" id="txt_in_username" placeholder="Username Untuk Login Pengurus RT"
-                                class="form-control">
-                        </div>
+                   
                         <div class="form-group">
                             <label for="name">Kontak Pengurus RT</label>
                             <input type="" required="" id="txt_in_contact" placeholder="Kontak RT" class="form-control">
@@ -288,10 +283,7 @@
                     data: 'rw',
                     name: 'rw'
                 },
-                {
-                    data: 'username',
-                    name: 'username'
-                },
+           
                 {
                     data: 'action',
                     name: 'action',
@@ -323,7 +315,6 @@
 
 
         let in_kode = $('#txt_in_kode').val();
-        let in_username = $('#txt_in_username').val();
         let in_password = $('#txt_in_password').val();
         let in_contact = $('#txt_in_contact').val();
         let id_rw = $('#id_rw').val();
@@ -331,7 +322,7 @@
         console.log(id_rw);
         
 
-        const myInput = [in_kode, in_username, in_contact, in_password,id_rw];
+        const myInput = [in_kode, in_contact, in_password,id_rw];
         if (myInput.includes(null) || myInput.includes(undefined) || myInput.includes("")) {
             in_error = true;
         }
@@ -346,7 +337,6 @@
                     "_token": "{{ csrf_token() }}",
                     "kode": in_kode,
                     "contact": in_contact,
-                    "username": in_username,
                     "id_rw": id_rw,
                     "password": in_password,
                 },

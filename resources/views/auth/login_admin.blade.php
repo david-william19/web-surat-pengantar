@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
                                    Kelurahan Citereup © {{ \Carbon\Carbon::now()->year }} <br>
-                                    <a href="{{ url('/login/kepala-keluarga') }}"><small>Klik Disini Untuk Login Kepala Keluarga</small></a>
+                                    <a href="{{ url('/login') }}"><small>Klik Disini Untuk Login Kepala Keluarga</small></a>
                                 </div>
                             </div>
                         </form>

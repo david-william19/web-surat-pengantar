@@ -10,6 +10,6 @@ class RukunWarga extends Model
     use HasFactory;
     protected $table = "rukun_warga";
     protected $fillable = [
-        "kode","username","kontak","password"
+        "kode","username","kontak","password","alamat"
     ];
 }

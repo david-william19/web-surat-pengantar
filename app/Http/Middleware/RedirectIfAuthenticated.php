@@ -25,9 +25,9 @@ class RedirectIfAuthenticated
             if (Auth::guard("admin")->check()) {
                 return redirect('/admin');
             }
-            // if (Auth::guard("warga")->check()) {
-            //     return redirect("/warga");
-            // }
+            if (Auth::guard("keluarga")->check()) {
+                return redirect("/keluarga");
+            }
         }
 
         return $next($request);

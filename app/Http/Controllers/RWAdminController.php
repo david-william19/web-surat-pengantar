@@ -80,8 +80,17 @@ class RWAdminController extends Controller
             'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
         ];
 
+     
+
         $this->validate($request, $rules, $customMessages);
 
+        if (RukunWarga::where("kontak",'=',$request->contact)->where('id','<>',$id)->count()>0) {
+            return back()->with(["error" => "Gagal Mengupdate Data, Kontak Sudah Digunakan Pada RW Lain"]);
+        }
+        if (RukunWarga::where("kode",'=',$request->kode)->where('id','<>',$id)->count()>0) {
+            return back()->with(["error" => "Gagal Mengupdate Data, Kode RW Sudah Digunakan Pada RW Lain"]);
+        }
+        
         $object = RukunWarga::findOrFail($id);
         $object->kode = $request->kode;
         $object->kontak = $request->contact;

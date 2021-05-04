@@ -62,6 +62,10 @@
             @include('main.components.topbar-warga')
         @endif
 
+        @if (Auth::guard('keluarga')->check())
+            @include('main.components.topbar-keluarga')
+        @endif
+
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -73,6 +77,9 @@
         @endif
         @if (Auth::guard('warga')->check())
             @include('main.components.left-sidebar-warga')
+        @endif
+        @if (Auth::guard('keluarga')->check())
+            @include('main.components.left-sidebar-keluarga')
         @endif
     
         <!-- ============================================================== -->
@@ -105,7 +112,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center text-muted">
-                Developed and Programmed by <a href="http://henryaugusta.feylabs.my.id">Henry Augusta</a>.
+              Copyright @ Kelurahan Citereup
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

@@ -17,7 +17,8 @@ class CreateRukunWargasTable extends Migration
             $table->id();
             $table->string('kode')->unique();
             $table->string('password');
-            $table->string('kontak');
+            $table->string('kontak')->unique();
+            $table->string('alamat')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
 
 body {
-    background: url('https://image.freepik.com/free-photo/islamic-decoration-background-with-crescent-mosque-arabic-lantern_257995-523.jpg') no-repeat;
+    /* background: url('https://image.freepik.com/free-photo/islamic-decoration-background-with-crescent-mosque-arabic-lantern_257995-523.jpg') no-repeat; */
+    background: url('https://images.pexels.com/photos/654/clouds-cloudy-agriculture-farm.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940') no-repeat;
     /*background-color: #FBFBFA;*/
     background-position: right bottom;
     background-size: auto;

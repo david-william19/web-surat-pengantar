@@ -15,9 +15,11 @@ class CreateRukunTetanggasTable extends Migration
     {
         Schema::create('rukun_tetangga', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->unique();
+            $table->string('kode');
             $table->string('password');
-            $table->string('kontak');
+            $table->string('kontak')->unique();
+            $table->string('alamat')->nullable();
+            $table->unique(['kode', 'id_rw']);
             $table->unsignedBigInteger('id_rw');
             $table->foreign('id_rw')->references('id')->on('rukun_warga')->onDelete('cascade');
             $table->string('status')->nullable();

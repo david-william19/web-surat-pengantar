@@ -46,9 +46,9 @@ return [
             'provider' => 'wargas',
         ],
 
-        'kepala_keluarga' => [
+        'keluarga' => [
             'driver' => 'session',
-            'provider' => 'kepala_keluargas',
+            'provider' => 'keluargas',
         ],
 
         'admin' => [
@@ -85,9 +85,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'kepala_keluargas' => [
+        'keluargas' => [
             'driver' => 'eloquent',
-            'model' => App\Models\KepalaKeluarga::class,  //nanti ganti jadi warga
+            'model' => App\Models\Keluarga::class,  
         ],
         'wargas' => [
             'driver' => 'eloquent',

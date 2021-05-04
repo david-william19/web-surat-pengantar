@@ -49,7 +49,7 @@
         }
 
         .background-image {
-            background-image: url('https://image.freepik.com/free-vector/mandala-illustration_53876-81805.jpg');
+            background-image: url('https://images.pexels.com/photos/654/clouds-cloudy-agriculture-farm.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
             margin: 0;
             background-repeat: no-repeat;
             position: fixed;
@@ -62,11 +62,12 @@
             /* Center and scale the image nicely */
             background-position: center;
             background-size: cover;
-            -webkit-filter: blur(2px);
+            /* Blurry */
+            /* -webkit-filter: blur(2px);
             -moz-filter: blur(2px);
             -o-filter: blur(2px);
             -ms-filter: blur(2px);
-            filter: blur(2px);
+            filter: blur(2px); */
         }
 
         .auth-box {
@@ -83,6 +84,7 @@
 </head>
 
 <body>
+    <div class="background-image"></div>
 
     <div class="main-wrapper">
 
@@ -105,7 +107,6 @@
         <div id="particles-js"></div>
 
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="">
-            <div class="background-image"></div>
 
             <div class="auth-box row round-all">
                 {{-- <div class="col-lg-5 miii col-md-5 modal-bg-img round-top-left round-bottom-left"
@@ -119,7 +120,7 @@
                         </div>
                         <h2 class="mt-3 text-center">Kelurahan Citereup</h2>
                         <p class="text-center">Registrasi Kelapa Keluarga</p>
-                        <form class="mt-4" action="{{ url('/santri/storeSelf') }}" method="post" enctype="multipart/form-data">
+                        <form class="mt-4" action="{{ url('registrasi/kepala-keluarga/proceed') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @if (session()->has('error'))
@@ -156,37 +157,35 @@
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">Kontak</label>
+                                        <label class="text-dark" for="uname">No Telepon ( Digunakan Untuk Login ) </label>
                                         <input required class="form-control  @error('kontak') is-invalid @enderror" 
-                                            name="kontak" type="text" placeholder="Masukkan Nama">
+                                            name="kontak" type="text" placeholder="Misal (628823738709) Tanpa Spasi, ">
                                     </div>
-                                </div>
-
-
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="text-dark" for="uname">Kelas</label>
-                                        <input required class="form-control  @error('class') is-invalid @enderror" 
-                                            name="class" type="text" placeholder="Masukkan Kelas">
-                                            <small>Tanpa Spasi , Kapital misal : SI-42-06</small>
-                                        </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                      <label for="">Foto</label>
-                                      <input type="file" required class="form-control-file" name="photo" id="" placeholder="" aria-describedby="fileHelpId">
-                                      <small id="fileHelpId" class="form-text text-muted">Foto Profil</small>
-                                    </div>
+                                        <label for="">Asal Yuridiksi RT</label>
+                                        <select class="form-control" name="rt" required id="">
+                                          @foreach ($rt as $item)
+                                          <option value="{{$item['id_rt']}}">{{$item["kode_rt"]}} - {{$item['kode_rw']}}</option>
+                                          @endforeach
+                                        </select>
+                                      </div>
                                 </div>
 
-                              
-                              
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                      <label for="">Alamat Lengkap</label>
+                                      <textarea class="form-control" name="alamat" id="" rows="3" placeholder="Alamat Lengkap Rumah Tinggal Utama Keluarga"></textarea>
+                                    </div>
+                                </div>
+                            
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="text-dark" for="pwd">Password</label>
                                         <input class="form-control  @error('password') is-invalid @enderror"
-                                            name="password" id="pwd" type="password" placeholder="Password">
+                                            name="password" id="pwd" type="text" placeholder="Password">
                                     </div>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -198,7 +197,7 @@
                                     <button type="submit" class="btn btn-block btn-dark">Registrasi</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    Dept Kaderisasi <br> Badan Mentoring © {{ \Carbon\Carbon::now()->year }} <br>
+                                    Kelurahan Citereup © {{ \Carbon\Carbon::now()->year }} <br>
                                     <a href="{{url('/login')}}"><small>Klik Disini Untuk Login</small></a>
                                 </div>
                             </div>

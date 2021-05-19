@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RukunTetangga;
 use App\Models\RukunWarga;
+use Exception;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -21,7 +22,7 @@ class RTAdminController extends Controller
                     return $img;
                 })
                 ->addColumn('rw', function ($row) {
-                    $rw = RukunWarga::where('id','=',$row->id_rw)->first()->kode;
+                    $rw = RukunWarga::where('id', '=', $row->id_rw)->first()->kode;
                     return $rw;
                 })
                 ->addColumn('action', function ($row) {
@@ -42,7 +43,7 @@ class RTAdminController extends Controller
     {
         $rt = RukunTetangga::findOrFail($id);
         $rwList = RukunWarga::all();
-        return view('rw.admin_edit')->with(compact('rt','rwList'));
+        return view('rt.admin_edit')->with(compact('rt', 'rwList'));
     }
 
 
@@ -64,12 +65,13 @@ class RTAdminController extends Controller
         }
     }
 
-    function deleteAjax(Request $request,$id){
+    function deleteAjax(Request $request, $id)
+    {
         $object = RukunTetangga::findOrFail($id);
         $object->delete();
-        if($object){
+        if ($object) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -92,7 +94,12 @@ class RTAdminController extends Controller
         $object->kode = $request->kode;
         $object->id_rw = $request->id_rw;
         $object->kontak = $request->contact;
-        $object->save();
+
+        try {
+            $object->save();
+        } catch (Exception $e) {
+            return back()->with(["error" => "Kode RT Sudah Digunakan Pada RW Yang Baru (Duplikat)"]);
+        }
 
         if ($object) {
             return back()->with(["success" => "Berhasil Mengupdate Data"]);

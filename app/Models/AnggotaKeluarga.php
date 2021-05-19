@@ -23,4 +23,6 @@ class AnggotaKeluarga extends Model
         "current_address",
         "path_ktp",
     ];
+
+    
 }

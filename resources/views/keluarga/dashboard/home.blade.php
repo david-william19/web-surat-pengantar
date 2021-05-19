@@ -47,8 +47,6 @@
                 @csrf
                 <input type="hidden" name="id" value="{{ Auth::guard('keluarga')->id() }}">
                 <h3 class="card-title">Data Keluarga Anda</h3>
-                <p class="card-text">With supporting text below as a natural lead-in to additional
-                    content.</p>
                 <div class="form-group">
                     <label for="">Nama Keluarga</label>
                     <input type="text" class="form-control" name="nama" id="" value="{{ $widget['keluarga']->nama }}"
@@ -108,7 +106,7 @@
 
             <div class="card-body">
 
-                <form action="{{ url('/keluarga/changeKKPhoto') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('/keluarga'.'/'.$widget['keluarga']->id.'/changeKKPhoto') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{ Auth::guard('keluarga')->id() }}">
                     <h3 class="card-title">Foto Kartu Keluarga</h3>

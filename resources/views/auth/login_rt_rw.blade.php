@@ -91,6 +91,8 @@
                 <div class="col-lg-7 miii col-md-5 modal-bg-img round-top-left round-bottom-left"
                     style="background-image: url({{ URL::to('/bootstrap_ui/') }}/assets/images/cover.jpg);">
                 </div>
+
+
                 <div class="col-lg-5 col-md-7 bg-white round-top-right round-bottom-right">
                     <div class="p-3">
                         <div class="text-center">
@@ -98,34 +100,19 @@
                                 src="{{ URL::to('/bootstrap_ui/') }}/assets/images/big_logo.png" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Sign In</h2>
-                        <p class="text-center">Admin Kelurahan Citereup</p>
-                        <form class="mt-4" action="{{ url('/login/admin/proc') }}" method="post">
+                        <p class="text-center">Kelurahan Citereup</p>
+
+                        @include('components.message')
+
+                        <form class="mt-4" action="{{ url('/login/proc') }}" method="post">
                             {{ csrf_field() }}
-
-                            @if (session()->has('error'))
-                                <div class="alert alert-primary" role="alert">
-                                    <strong>primary</strong>
-                                </div>
-                            @endif
-
-                            @if ($errors->any())
-
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        <span class="sr-only">Close</span>
-                                    </button>
-                                    {!! implode('', $errors->all('<div> - :message</div>')) !!}
-                                </div>
-
-                            @endif
 
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label class="text-dark" for="uname">Email Admin</label>
-                                        <input class="form-control  @error('email') is-invalid @enderror" id="uname"
-                                            name="email" type="text" placeholder="Email">
+                                        <label class="text-dark" for="uname">Nomor Telepon/Email</label>
+                                        <input class="form-control  @error('uname') is-invalid @enderror" id="uname"
+                                            name="uname" type="text" placeholder="Kontak">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -144,8 +131,9 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                   Kelurahan Citereup © {{ \Carbon\Carbon::now()->year }} <br>
-                                    <a href="{{ url('/login') }}"><small>Klik Disini Untuk Login Kepala Keluarga</small></a>
+                                    Kelurahan Citereup © {{ \Carbon\Carbon::now()->year }} <br>
+                                    <a href="{{ url('/registrasi/keluarga') }}"><small>Klik Disini Untuk Mendaftarkan
+                                            Keluarga</small></a>
                                 </div>
                             </div>
                         </form>

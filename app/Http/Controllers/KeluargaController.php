@@ -9,6 +9,7 @@ use App\Models\RukunWarga;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class KeluargaController extends Controller
@@ -124,9 +125,12 @@ class KeluargaController extends Controller
         return $request->all();
     }
 
-    function changeKKPhoto(Request $request)
+    function changeKKPhoto(Request $request,$id_kel)
     {
         $id = $request->id;
+        if ($id==null) {
+            $id=$id_kel;
+        }
         $user = Keluarga::findOrFail($id);
 
         if ($request->hasFile('photo')) {
@@ -161,9 +165,12 @@ class KeluargaController extends Controller
 
     //member section
 
-    public function storeMember(Request $request)
+    public function storeMember(Request $request,$id_kel)
     {
         $id = ($request->id);
+        if ($id==null) {
+            $id = $id_kel;
+        }
         $rules = [
             'nama' => 'required',
             'nik' => 'required',
@@ -201,7 +208,7 @@ class KeluargaController extends Controller
 
         $object = new AnggotaKeluarga();
         $object->nik = $request->nik;
-        $object->id_keluarga = $request->id;
+        $object->id_keluarga = $id;
         $object->nama = $request->nama;
         $object->gender = $request->gender;
         $object->tempat_lahir = $request->tempat_lahir;
@@ -221,7 +228,7 @@ class KeluargaController extends Controller
         }
     }
 
-    public function updateMember(Request $request,$id)
+    public function updateMember(Request $request, $id)
     {
         $object = AnggotaKeluarga::findOrFail($id);
 
@@ -243,15 +250,13 @@ class KeluargaController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        $photoPath = "";
+        $photoPath = $object->path_ktp;
         if ($request->hasFile('photo')) {
-
-            $file_path = public_path().$object->path_ktp;
+            $file_path = public_path() . $object->path_ktp;
             if (file_exists($file_path)) {
-                try{
+                try {
                     unlink($file_path);
-                }catch(Exception $e){
-
+                } catch (Exception $e) {
                 }
             }
 
@@ -274,6 +279,7 @@ class KeluargaController extends Controller
         $object->nama = $request->nama;
         $object->gender = $request->gender;
         $object->tempat_lahir = $request->tempat_lahir;
+        $object->id_keluarga = $request->id_keluarga;
         $object->tanggal_lahir = $request->tanggal_lahir;
         $object->agama = $request->agama;
         $object->pendidikan = $request->pendidikan;
@@ -290,49 +296,66 @@ class KeluargaController extends Controller
         }
     }
 
-    public function viewAddMember(Request $request)
+    public function viewAddMember(Request $request,$id)
     {
-        $widget = [];
-        return view('anggota_keluarga.keluarga_add')->with(compact('widget'));
+        $keluarga=Keluarga::findOrFail($id);
+        return view('anggota_keluarga.keluarga_add')->with(compact('keluarga'));
     }
 
-    public function viewManageMember(Request $request)
+    public function viewManageMember(Request $request,$id)
     {
-        $widget = [];
-        $anggotaKeluarga = AnggotaKeluarga::where("id_keluarga", "=", Auth::guard('keluarga')->id())->get();
-        return view('anggota_keluarga.keluarga_manage')->with(compact('anggotaKeluarga'));
+        $keluarga=Keluarga::findOrFail($id);
+        return view('anggota_keluarga.keluarga_manage')->with(compact('keluarga'));
     }
 
-    function viewEdit(Request $request, $id)
+    function viewEditMember(Request $request, $id)
     {
         $member = AnggotaKeluarga::findOrFail($id);
-        return view('anggota_keluarga.keluarga_edit')->with(compact('member'));
+        $currentKeluargaId = $member->id_keluarga;
+        $currentKeluarga = Keluarga::findOrFail($currentKeluargaId);
+        $rt = RukunTetangga::all();
+        $keluarga = Keluarga::where('rt','=',$currentKeluarga->rt)->get();
+        return view('anggota_keluarga.keluarga_edit')->with(compact('member','rt','keluarga','currentKeluarga'));
+    }
+    
+    function viewAddNew(Request $request)
+    {
+        $rt = RukunTetangga::all();
+        return view('keluarga.tambah_keluarga')->with(compact('rt'));
     }
 
-    function deleteMemberAjax(Request $request,$id){
+    function viewDetailMember(Request $request, $id)
+    {
+        $member = AnggotaKeluarga::findOrFail($id);
+        return view('anggota_keluarga.keluarga_see')->with(compact('member'));
+    }
+
+    function deleteMemberAjax(Request $request, $id)
+    {
         $object = AnggotaKeluarga::findOrFail($id);
-        $file_path = public_path().$object->path_ktp;
+        $file_path = public_path() . $object->path_ktp;
         if (file_exists($file_path)) {
-            try{
+            try {
                 unlink($file_path);
-            }catch(Exception $e){
+            } catch (Exception $e) {
                 //Do Nothing
             }
         }
 
         $object->delete();
-        
-        if($object){
+
+        if ($object) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
 
-    function getAnggotaAjax(Request $request)
+    function getAnggotaAjax(Request $request, $id)
     {
         if ($request->ajax()) {
             $data = AnggotaKeluarga::select('*')
+                ->where('id_keluarga', '=', $id)
                 ->orderBy('created_at', 'ASC');
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -348,12 +371,57 @@ class KeluargaController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<div class="d-flex"><a href="' . url("member/$row->id/edit") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Edit/Lihat Detail</a>';
+                    $btn = '<div class="d-flex"><a href="' . url("member/$row->id/edit") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Edit</a>';
                     $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'gender', 'img'])
+                ->addColumn('detail', function ($row) {
+                    $btn = '<div class="d-flex"><a href="' . url("member/$row->id/detail") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Lihat Detail</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action', 'gender', 'img','detail'])
                 ->make(true);
+        }
+    }
+
+    function viewChangePassword($id)
+    {
+        $keluarga = Keluarga::findOrFail($id);
+        return view('keluarga.keluarga_change_password')->with(compact('keluarga'));
+    }
+    function viewInfo($id)
+    {
+        $keluarga = Keluarga::findOrFail($id);
+        return view('keluarga.keluarga_info_see')->with(compact('keluarga'));
+    }
+    function viewEdit($id)
+    {
+        $keluarga = Keluarga::findOrFail($id);
+        $rt = RukunTetangga::all();
+        return view('keluarga.keluarga_info_edit')->with(compact('keluarga','rt'));
+    }
+
+    function changePassword($id, Request $request)
+    {
+        $user_id = $id;
+        $this->validate($request, [
+            'new_password' => 'required|min:6',
+            'old_password' => 'required|min:6'
+        ]);
+        $user = Keluarga::findOrFail($user_id);
+        $hasher = app('hash');
+
+        //If Password Sesuai
+        if (!$hasher->check($request->old_password, $user->password)) {
+            return back()->with(["error" => "Password Lama Tidak Sesuai"]);
+        } else {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+            if ($user) {
+                return back()->with(["success" => "Password Berhasil Diperbarui"]);
+            } else {
+                return back()->with(["error" => "Password Gagal Diperbarui"]);
+            }
         }
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Keluarga;
+use App\Models\RukunTetangga;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -41,42 +43,47 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function checkLogin(Request $request){
+    public function checkLogin(Request $request)
+    {
 
-        $isKeluarga = Keluarga::where('kontak','=',$request->uname)->count();
-        
-        if ($isKeluarga>0) {
-           return $this->keluargaLogin($request);
-        }else{
+        $isKeluarga = Keluarga::where('kontak', '=', $request->uname)->count();
+        $isRT = RukunTetangga::where('kontak', '=', $request->uname)->count();
+        $isAdmin = Admin::where('contact', '=', $request->uname)->count();
+
+        if ($isKeluarga > 0) {
+            return $this->keluargaLogin($request);
+        } else if ($isRT > 0) {
+            return $this->rtLogin($request);
+        } else if ($isAdmin > 0) {
+            return $this->adminLogin($request);
+        } else {
             return back()->with(["error" => "Akun tidak ditemukan"]);
         }
-
-
     }
 
 
     public function adminLogin(Request $request)
     {
         $this->validate($request, [
-            'email'   => 'required|email',
+            'uname'   => 'required',
             'password' => 'required|min:6'
         ]);
 
         if (Auth::guard('admin')->attempt(
             [
-                'email' => $request->email,
+                'contact' => $request->uname,
                 'password' => $request->password
             ],
             $request->get('remember')
         )) {
             return redirect()->intended('/admin');
         } else {
-            return redirect('login/admin')->withErrors([
-                'error' => 'Username Atau Password Salah'
+            return redirect('login')->withErrors([
+                'error' => 'Username Atau Password Salah (Admin)'
             ]);
         }
-        
-        return back()->withInput($request->only('email', 'remember'));
+
+        return back()->withInput($request->only('uname', 'remember'));
     }
 
     public function keluargaLogin(Request $request)
@@ -99,8 +106,32 @@ class LoginController extends Controller
                 'error' => 'Username Atau Password Salah'
             ]);
         }
-        
+
         return redirect('/login')->withInput($request->only('uname', 'password'));
     }
- 
+
+
+    public function rtLogin(Request $request)
+    {
+        $this->validate($request, [
+            'uname'   => 'required|numeric',
+            'password' => 'required|min:6'
+        ]);
+
+        if (Auth::guard('erte')->attempt(
+            [
+                'kontak' => $request->uname,
+                'password' => $request->password
+            ],
+            $request->get('remember')
+        )) {
+            return redirect()->intended('/rt')->with(["success" => "Login Berhasil"]);
+        } else {
+            return redirect('/login')->withErrors([
+                'error' => 'Username Atau Password Salah'
+            ]);
+        }
+
+        return redirect('/login')->withInput($request->only('uname', 'password'));
+    }
 }

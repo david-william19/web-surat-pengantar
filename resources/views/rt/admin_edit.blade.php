@@ -33,33 +33,50 @@
 
         <div class="col-12">
 
-            <form action='{{url("/rw/{$rw->id}/edit")}}' method="post">
+            <form action='{{url("/rt/{$rt->id}/edit")}}' method="post">
                 @csrf
                 @method('POST')
 
-                <input type="hidden" name="id" value="{{$rw->id}}">
+                <input type="hidden" name="id" value="{{$rt->id}}">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title">Edit Data {{ $rw->kode }}</h2>
+                        <h2 class="card-title">Edit Data {{ $rt->kode }}</h2>
                         <h5 class="card-subtitle">Edit Data Rukun Warga</h5>
-
 
                         <div class="form-group">
                           <label for="">Kode RW</label>
                           <input type="text"
-                            class="form-control" name="kode" value="{{$rw->kode}}" id=""  placeholder="">
+                            class="form-control" name="kode" value="{{$rt->kode}}" id=""  placeholder="">
                           <small class="form-text text-muted">Kode RW</small>
                         </div>
                         
                         <div class="form-group">
-                          <label for="">Kontak RW</label>
+                          <label for="">Kontak RT</label>
                           <input type="text"
-                            class="form-control" name="contact" value="{{$rw->kontak}}" id=""  placeholder="">
+                            class="form-control" name="contact" value="{{$rt->kontak}}" id=""  placeholder="">
                           <small class="form-text text-muted">Kontak RW</small>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update Data RW</button>                       
+                            <div class="form-group">
+                              <label for="">Anggota Dari RW</label>
+                              <select class="form-control" name="id_rw" id="">
+                                @forelse ($rwList as $item)
+                                <option @if ($item != null) 
+                                {{ $item->id == $rt->id_rw ? 'selected' : '' }} @endif value="{{ $item->id }}">
+
+                                {{$item->kode}}
+
+                                </option>
+                                @empty
+                                    
+                                @endforelse
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Update Data RT</button>                       
                         </div>
 
                     </div>
@@ -71,21 +88,21 @@
 
         <div class="col-12">
 
-            <form action='{{url("/rw/{$rw->id}/admin_change_password")}}' method="post">
+            <form action='{{url("/rt/{$rt->id}/admin_change_password")}}' method="post">
                 @csrf
                 @method('POST')
 
-                <input type="hidden" name="id" value="{{$rw->id}}">
+                <input type="hidden" name="id" value="{{$rt->id}}">
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Reset Password (Oleh Admin)</h3>
-                        <h5 class="card-subtitle">Gunakan Fitur Ini Jika Admin RW Lupa Password</h5>
+                        <h5 class="card-subtitle">Gunakan Fitur Ini Jika Admin RT Lupa Password</h5>
 
                         <div class="form-group">
                           <label for="">Password Baru</label>
                           <input type="text"
                             class="form-control" name="new_password" placeholder="Isi Kolom Ini Dengan Password Baru">
-                          <small class="form-text text-muted">Kode RW</small>
+                          <small class="form-text text-muted">Kode RT</small>
                         </div>
                         
                         <div class="form-group">

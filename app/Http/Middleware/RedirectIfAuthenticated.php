@@ -28,6 +28,9 @@ class RedirectIfAuthenticated
             if (Auth::guard("keluarga")->check()) {
                 return redirect("/keluarga");
             }
+            if (Auth::guard("erte")->check()) {
+                return redirect("/rt");
+            }
         }
 
         return $next($request);

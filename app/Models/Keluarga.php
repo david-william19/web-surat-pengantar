@@ -10,6 +10,7 @@ class Keluarga extends Authenticatable{
     use HasFactory;
     protected $table = "keluarga";
     protected $fillable=[
+        "id",
         "no_kk",
         "nama",
         "email",
@@ -20,5 +21,15 @@ class Keluarga extends Authenticatable{
         "rt",
         "rw",
     ];
+
+    protected $appends = ['rt_detail','anggota','jumlah_anggota'];
+
+    function getRtDetailAttribute(){
+        return RukunTetangga::find($this->rt);
+    }
+
+    function getJumlahAnggotaAttribute(){
+        return AnggotaKeluarga::where('id_keluarga','=',$this->id)->count();
+    }
 
 }

@@ -66,6 +66,10 @@
             @include('main.components.topbar-keluarga')
         @endif
 
+        @if (Auth::guard('erte')->check())
+            @include('main.components.topbar-erte')
+        @endif
+
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -80,6 +84,9 @@
         @endif
         @if (Auth::guard('keluarga')->check())
             @include('main.components.left-sidebar-keluarga')
+        @endif
+        @if (Auth::guard('erte')->check())
+            @include('main.components.left-sidebar-erte')
         @endif
     
         <!-- ============================================================== -->

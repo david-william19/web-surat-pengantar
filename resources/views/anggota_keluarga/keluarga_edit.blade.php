@@ -2,13 +2,13 @@
 
 @section('page-breadcrumb')
     <div class="row">
-        <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">News Feed</h4>
+        <div class="col-12 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Keluarga</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
-                        <li class="breadcrumb-item text-muted active" aria-current="page">News Feed</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Manage News Feed</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Anggota Keluarga</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -29,13 +29,13 @@
 
     <div class="card border-success">
         <div class="card-header bg-success">
+            <h3 class="card-title">Keluarga : {{$currentKeluarga->nama}}</h3>
             <h4 class="mb-0 text-white">Edit Anggota Keluarga : {{ $member->nama }}</h4>
         </div>
         <div class="card-body">
             <form action='{{ url("/member/$member->id/update") }}' method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{ $member->id }}">
-                <h3 class="card-title">Tambah Anggota Keluarga Baru</h3>
 
                 <div class="form-group">
                     <label for="">Nama Lengkap</label>
@@ -110,10 +110,25 @@
                     <input name="photo" type="file" class="custom-file-input" id="inputGroupFile03">
                     <label class="custom-file-label" for="inputGroupFile03">Ganti Foto KTP</label>
                 </div>
+
+
+                <div class="form-group">
+                    <label for="">Ganti Keluarga : </label>
+                    <select class="form-control" name="id_keluarga" required id="">
+                        <option value="{{$currentKeluarga->id}}">{{ $currentKeluarga->nama.' - '.$currentKeluarga->rt_detail->join_info}}</option>
+                        @forelse ($keluarga as $item)
+                            <option value="{{$item->id}}">{{ $item->nama.' - '.$item->rt_detail->join_info}}</option>
+                        @empty
+                            
+                        @endforelse
+                    </select>
+                </div>
+
+
                 <small class="form-text text-muted">Upload Foto Baru, Kosongkan Jika Tidak Ingin Mengganti Foto</small>
 
 
-                <button type="submit" class="btn btn-block btn-primary">Update Data Keluarga</button>
+                <button type="submit" class="btn btn-block btn-primary">Update Data Anggota Keluarga</button>
             </form>
         </div>
     </div>
@@ -166,6 +181,7 @@
                     'csvHtml5',
                 ],
                 ajax: {
+                    async : false,
                     type: "get",
                     url: "{{ url('admin/data/santri/manage') }}",
                     data: {

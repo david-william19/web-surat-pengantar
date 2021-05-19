@@ -3,7 +3,7 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Anggota Keluarga</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Daftar Keluarga di RT</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -25,7 +25,7 @@
     @include('components.message')
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title mb-2">Manage Data Anggota Keluarga</h2>
+            <h2 class="card-title mb-2">Daftar Keluarga di RT {{$rt->join_info}}</h2>
             <h6 class="card-subtitle mt-2">
             Edit Data Anggota Keluarga
             </h6>
@@ -37,17 +37,30 @@
                     <thead class="bg-success text-white">
                         <tr>
                             <th>No</th>
-                            <th>Foto KTP</th>
-                            <th>NIK</th>
-                            <th>Nama Lengkap</th>
-                            <th>Gender</th>
-                            <th>Tempat Lahir</th>
-                            <th>Pekerjaan</th>
-                            <th>Pendidikan</th>
-                            <th>Edit</th>
+                            <th>Nama Keluarga</th>
+                            <th>Kartu Keluarga</th>
+                            <th>Jumlah Anggota Keluarga Yang Ditambahkan Ke Sistem</th>
+                            <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
+
+                        @forelse ($keluarga as $item)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->nama}}</td>
+                            <td><img style="border-radius:10px !important" class="center-cropped rounded" src="{{url('/') . $item->photo_kartu_keluarga}}" alt=""
+                                onerror="this.onerror=null;this.src='{{url('/').'/img/onerror.png'}}';"
+                                ></td>
+                            <td>{{$item->jumlah_anggota}}</td>
+                            <td><div class="d-flex"><a href='{{url("keluarga/$item->id/edit")}}' class="btn btn-primary btn-sm ml-2">Lihat Detail / Edit</a></div></td>
+                        </tr>  
+                        @empty
+                            <div class="alert alert-primary" role="alert">
+                                <strong>Belum Ada Anggota Keluarga</strong>
+                            </div>
+                        @endforelse
+                    
 
                     </tbody>
                     <tfoot>
@@ -106,7 +119,7 @@
     $(function() {
         var table = $('#table_data').DataTable({
             processing: true,
-            serverSide: true,
+            serverSide: false,
             columnDefs: [{
                 orderable: true,
                 targets: 0
@@ -124,52 +137,6 @@
                 },
                 'csvHtml5',
             ],
-            ajax: {
-                type: "get",
-                url: "{{ url('keluarga/getAnggotaAjax').'/'.$keluarga->id }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                },
-                async: true,
-                error: function(xhr, error, code) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    console.log(err);
-                }
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'id'
-                },
-                {
-                    data: 'img',
-                },
-                {
-                    data: 'nik',
-                    name: 'nik'
-                },
-                {
-                    data: 'nama',
-                },
-                {
-                    data: 'gender',
-                },
-                {
-                    data: 'tempat_lahir',
-                },
-                {
-                    data: 'pekerjaan',
-                },
-                {
-                    data: 'pendidikan',
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
-
-            ]
         });
 
         $('body').on("click", ".btn-delete", function() {

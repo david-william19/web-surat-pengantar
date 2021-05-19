@@ -21,7 +21,7 @@ class KeluargaSeeder extends Seeder
 
         for ($i = 0; $i < 300; $i++) {
             try{
-                $this->insert($faker->name, "citereup", $faker->numberBetween(100000000000, 999999999999), $faker->numerify('628##########'), $faker->address, $rt);                
+                $this->insert($faker->name, "citereup", $faker->numberBetween(100000000000, 999999999999), $faker->numerify('628##########'), $faker->address, $faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));                
             }catch(Exception $exception){
                 continue;
             }

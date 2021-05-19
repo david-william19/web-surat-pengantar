@@ -51,6 +51,11 @@ return [
             'provider' => 'keluargas',
         ],
 
+        'erte' => [
+            'driver' => 'session',
+            'provider' => 'ertes',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -88,6 +93,10 @@ return [
         'keluargas' => [
             'driver' => 'eloquent',
             'model' => App\Models\Keluarga::class,  
+        ],
+        'ertes' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\RukunTetangga::class,  
         ],
         'wargas' => [
             'driver' => 'eloquent',

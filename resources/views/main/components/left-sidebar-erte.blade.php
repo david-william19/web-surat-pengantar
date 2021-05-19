@@ -4,18 +4,18 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{ URL('/keluarga') }}"
+                <li class="sidebar-item"><a class="sidebar-link sidebar-link" href="{{ URL('/rt') }}"
                         aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Anggota Keluarga</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Keluarga</span></li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/'.Auth::guard('keluarga')->id().'/anggota') }}"
-                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Anggota Keluarga
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rt/'.Auth::guard('erte')->id().'/keluarga') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Daftar Keluarga
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/'.Auth::guard('keluarga')->id().'/anggota/tambah') }}"
-                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tambah Anggota
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/tambah-keluarga') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tambah Keluarga
                         </span></a>
                 </li>
               
@@ -23,7 +23,7 @@
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link sidebar-link" href="{{url('/keluarga'.'/'.Auth::guard('keluarga')->id()).'/ganti-password'}}"
+                    <a class="sidebar-link sidebar-link" href="{{url('/rt'.'/'.Auth::guard('erte')->id()).'/ganti-password'}}"
                         aria-expanded="false">
                         <i data-feather="edit-3" class="feather-icon"></i><span
                             class="hide-menu">Ganti Password</span></a></li>

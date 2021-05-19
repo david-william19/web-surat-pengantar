@@ -3,12 +3,12 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Anggota Keluarga</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Keluarga</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item text-muted active" aria-current="page">Anggota Keluarga</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Tambah</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Lihat Detail Anggota</li>
                     </ol>
                 </nav>
             </div>
@@ -22,151 +22,93 @@
 @endsection
 
 @section('page-wrapper')
-   
+
 
     @include('components.message')
 
 
     <div class="card border-success">
         <div class="card-header bg-success">
-            <h4 class="mb-0 text-white">Tambah Anggota Keluarga Baru</h4>
+            <h4 class="mb-0 text-white">Anggota Keluarga : {{ $member->nama }}</h4>
         </div>
         <div class="card-body">
-            <h3 class="card-title">Keluarga : {{$keluarga->nama}}</h3>
-
-            <h4>Tambah Anggota Keluarga Baru</h4>
-
-            <hr>
-
-            <form action="{{ url('keluarga/'.$keluarga->id.'/anggota/simpan') }}" method="post" enctype="multipart/form-data">
+            <form action='{{ url("/member/$member->id/update") }}' method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="id" value="{{ $keluarga->id }}">
+                <input type="hidden" name="id" value="{{ $member->id }}">
+
                 
+                <img class="img-fluid" style="border-radius:30px !important; " class="center-cropped rounded"
+                    src="{{ url('/') . $member->path_ktp }}" alt="">
+
+
                 <div class="form-group">
                     <label for="">Nama Lengkap</label>
-                    <input type="text" class="form-control" required name="nama" 
-                        placeholder="Nama Lengkap">
-                    <small class="form-text text-muted">Nama Lengkap</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="">Nomor Induk Kependudukan</label>
-                    <input type="text" class="form-control" required name="nik" 
-                        placeholder="Nomor Induk Kependudukan">
+                    <input readonly type="text" class="form-control" required name="nama" placeholder="Nama Lengkap"
+                        value="{{ $member->nama }}">
                     <small class="form-text text-muted">Nama Lengkap</small>
                 </div>
 
                 <div class="form-group">
-                  <label for="">Jenis Kelamin</label>
-                  <select required class="form-control" name="gender">
-                    <option value="1">Laki-Laki</option>
-                    <option value="2">Perempuan</option>
-                  </select>
+                    <label for="">Nomor Induk Kependudukan</label>
+                    <input readonly type="text" class="form-control" required name="nik" placeholder="Nomor Induk Kependudukan"
+                        value="{{ $member->nik }}">
+                    <small class="form-text text-muted">Nama Lengkap</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Jenis Kelamin</label>
+                    <select disabled required class="form-control" name="gender">
+                        <option value="1" @if ($member->gender == '1') selected @endif>Laki-Laki</option>
+                        <option value="2" @if ($member->gender == '2') selected @endif>Perempuan</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="">Tempat Lahir</label>
-                    <input required type="text" class="form-control" name="tempat_lahir" 
-                        placeholder="Tempat Lahir">
+                    <input readonly required type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir"
+                        value="{{ $member->tempat_lahir }}">
                     <small class="form-text text-muted">Kota Kelahiran</small>
                 </div>
 
 
                 <div class="form-group">
                     <label for="">Tanggal Kelahiran</label>
-                    <input type="date" name="tanggal_lahir" required class="form-control" value="2018-05-13">
+                    <input readonly type="date" class="form-control" name="tanggal_lahir"
+                        value="{{ date('Y-m-d', strtotime(str_replace('-', '/', $member->tanggal_lahir))) }}">
                     <small class="form-text text-muted">Tanggal Kelahiran</small>
                 </div>
 
                 <div class="form-group">
                     <label for="">Agama</label>
-                    <input required type="text" class="form-control" name="agama" 
-                        placeholder="Agama">
+                    <input readonly required type="text" class="form-control" name="agama" placeholder="Agama"
+                        value="{{ $member->agama }}">
                     <small class="form-text text-muted">Agama ( Sesuai KTP ) </small>
                 </div>
 
                 <div class="form-group">
                     <label for="">Pendidikan</label>
-                    <input required type="text" class="form-control" name="pendidikan" 
-                        placeholder="Pendidikan">
+                    <input readonly required type="text" class="form-control" name="pendidikan" placeholder="Pendidikan"
+                        value="{{ $member->pendidikan }}">
                     <small class="form-text text-muted">Pendidikan ( Sesuai KTP ) </small>
                 </div>
 
                 <div class="form-group">
                     <label for="">Pekerjaan</label>
-                    <input required type="text" class="form-control" name="pekerjaan" 
-                        placeholder="Pekerjaan">
+                    <input readonly required type="text" class="form-control" name="pekerjaan" placeholder="Pekerjaan"
+                        value="{{ $member->pekerjaan }}">
                     <small class="form-text text-muted">Pekerjaan</small>
                 </div>
 
                 <div class="form-group">
                     <label for="">Alamat Saat Ini</label>
-                    <textarea class="form-control" placeholder="Alamat Anggota Keluarga"  name="alamat" id=""
-                        rows="5"></textarea>
+                    <textarea readonly class="form-control" placeholder="Alamat Anggota Keluarga" name="alamat" id=""
+                        rows="5">{{ $member->current_address }}</textarea>
                 </div>
 
-                <div class="form-group">
-                    <input type="hidden" name="id" value="{{ Auth::guard('keluarga')->id() }}">
-                    <p class="card-text">Upload Foto KTP</p>
-
-                    <div class="custom-file">
-                        <input required name="photo" type="file" class="custom-file-input" id="inputGroupFile03">
-                        <label class="custom-file-label" for="inputGroupFile03">Pilih Foto KTP</label>
-                    </div>
-                    <small class="form-text text-muted">Masukkan Foto KTP Disini</small>
-                </div>
-        
-
-                <button type="submit" class="btn btn-block btn-primary">Tambahkan Data Keluarga</button>
             </form>
         </div>
     </div>
 
-
-    <!-- Modal Add New -->
-    <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-modalLabel">Tambah Data Guru Baru</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <div class="form-group">
-                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
-                            <input type="hidden" required="" id="id" name="id" class="form-control">
-                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
-                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="">Ganti Status Mutaba'ah</label>
-                            <select class="form-control" required name="status" id="new_status">
-                                <option value="">Pilih Status</option>
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
-                            </select>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-update">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Add New -->
 
 
 
@@ -298,7 +240,6 @@
             });
 
         });
-
 
     </script>
 

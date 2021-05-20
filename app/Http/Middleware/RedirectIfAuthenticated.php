@@ -31,6 +31,9 @@ class RedirectIfAuthenticated
             if (Auth::guard("erte")->check()) {
                 return redirect("/rt");
             }
+            if (Auth::guard("erwe")->check()) {
+                return redirect("/rw");
+            }
         }
 
         return $next($request);

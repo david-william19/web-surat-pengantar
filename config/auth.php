@@ -56,6 +56,11 @@ return [
             'provider' => 'ertes',
         ],
 
+        'erwe' => [
+            'driver' => 'session',
+            'provider' => 'erwes',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -97,6 +102,10 @@ return [
         'ertes' => [
             'driver' => 'eloquent',
             'model' => App\Models\RukunTetangga::class,  
+        ],
+        'erwes' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\RukunWarga::class
         ],
         'wargas' => [
             'driver' => 'eloquent',

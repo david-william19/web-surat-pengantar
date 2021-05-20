@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 include __DIR__.'/user_rt.php';
+include __DIR__.'/user_rw.php';
 include __DIR__.'/user_admin.php';
 include __DIR__.'/user_keluarga.php';
 

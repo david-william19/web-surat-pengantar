@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Keluarga;
-use App\Models\RukunTetangga;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use App\Models\Keluarga;
+use App\Models\RukunWarga;
+use Yajra\DataTables\Facades\DataTables;
 
-class RTController extends Controller
+class RWController extends Controller
 {
     function viewListKeluarga($id){
-        $rt = RukunTetangga::findOrFail($id);
-        $keluarga  = Keluarga::where('rt','=',$id)->get();
-        return view('rt.list_keluarga')->with(compact('rt','keluarga'));
+        $rw = RukunWarga::findOrFail($id);
+        $keluarga  = Keluarga::where('rw','=',$id)->get();
+        return view('rw.list_keluarga')->with(compact('rw','keluarga'));
     }
 
     function listKeluarga(){
@@ -23,7 +23,7 @@ class RTController extends Controller
     {
         if ($request->ajax()) {
             $data = Keluarga::select('*')
-                ->where('rt', '=', $id)
+                ->where('rw', '=', $id)
                 ->orderBy('created_at', 'ASC')->get();
 
             return DataTables::of($data)
@@ -48,8 +48,8 @@ class RTController extends Controller
 
     function viewChangePassword($id)
     {
-        $rt = RukunTetangga::findOrFail($id);
-        return view('rt.change_password')->with(compact('rt'));
+        $rw = RukunWarga::findOrFail($id);
+        return view('rw.change_password')->with(compact('rw'));
     }
 
     function changePassword($id, Request $request)

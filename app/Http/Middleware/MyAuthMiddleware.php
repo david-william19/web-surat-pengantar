@@ -23,7 +23,6 @@ class MyAuthMiddleware
         if (Auth::guard('keluarga')->check()) {
             return redirect('/keluarga');
         }
-      
         return $next($request);
     }
 }

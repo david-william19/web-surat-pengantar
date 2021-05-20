@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class RukunWarga extends Model
+class RukunWarga extends Authenticatable
 {
     use HasFactory;
     protected $table = "rukun_warga";

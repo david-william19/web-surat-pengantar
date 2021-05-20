@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Keluarga;
 use App\Models\RukunTetangga;
+use App\Models\RukunWarga;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -48,15 +49,19 @@ class LoginController extends Controller
 
         $isKeluarga = Keluarga::where('kontak', '=', $request->uname)->count();
         $isRT = RukunTetangga::where('kontak', '=', $request->uname)->count();
+        $isRW = RukunWarga::where('kontak', '=', $request->uname)->count();
         $isAdmin = Admin::where('contact', '=', $request->uname)->count();
 
         if ($isKeluarga > 0) {
             return $this->keluargaLogin($request);
         } else if ($isRT > 0) {
             return $this->rtLogin($request);
-        } else if ($isAdmin > 0) {
+        } else if($isRW > 0){
+            return $this->rwLogin($request);
+        } 
+        else if ($isAdmin > 0) {
             return $this->adminLogin($request);
-        } else {
+        }  else {
             return back()->with(["error" => "Akun tidak ditemukan"]);
         }
     }
@@ -133,5 +138,29 @@ class LoginController extends Controller
         }
 
         return redirect('/login')->withInput($request->only('uname', 'password'));
+    }
+
+    public function rwLogin(Request $request){
+
+        $this->validate($request, [
+            'uname'   => 'required|numeric',
+            'password' => 'required|min:6'
+        ]);
+
+        if(Auth::guard('erwe')->attempt(
+            [
+            'kontak' => $request->uname,
+            'password' => $request->password
+            ],
+            $request->get('remember')
+        )) {
+            return redirect()->intended('/rw')->with(["success" => "Login Berhasil"]);
+        } else {
+            return redirect('/login')->withErrors([
+                'error' => 'Username Atau Password Salah'
+            ]);
+        }
+
+        return redirect('/login')->withInput($request->only('uname','password'));
     }
 }

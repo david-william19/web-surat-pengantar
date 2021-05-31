@@ -70,6 +70,10 @@
             @include('main.components.topbar-erte')
         @endif
 
+        @if (Auth::guard('erwe')->check())
+            @include('main.components.topbar-erwe')
+        @endif
+
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -87,6 +91,9 @@
         @endif
         @if (Auth::guard('erte')->check())
             @include('main.components.left-sidebar-erte')
+        @endif
+        @if (Auth::guard('erwe')->check())
+        @include('main.components.left-sidebar-erwe')
         @endif
     
         <!-- ============================================================== -->

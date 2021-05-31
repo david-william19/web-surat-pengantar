@@ -39,8 +39,8 @@
                             <th>No</th>
                             <th>Nama Keluarga</th>
                             <th>Kartu Keluarga</th>
-                            <th>Jumlah Anggota Keluarga Yang Ditambahkan Ke Sistem</th>
                             <th>Detail</th>
+                            <th>Jumlah Anggota Keluarga</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,8 +52,15 @@
                             <td><img style="border-radius:10px !important" class="center-cropped rounded" src="{{url('/') . $item->photo_kartu_keluarga}}" alt=""
                                 onerror="this.onerror=null;this.src='{{url('/').'/img/onerror.png'}}';"
                                 ></td>
+                            <td><div class="d-flex">
+                                @if (Auth::guard('erte')->check())
+                                <a href='{{url("keluarga/$item->id/edit")}}' class="btn btn-primary btn-sm ml-2">Lihat Detail / Edit</a></div></td>
+                                @endif
+                                @if (Auth::guard('erwe')->check())
+                                <a href='{{url("keluarga/$item->id/info")}}' class="btn btn-primary btn-sm ml-2">Lihat Detail / Edit</a></div></td>
+                                @endif
                             <td>{{$item->jumlah_anggota}}</td>
-                            <td><div class="d-flex"><a href='{{url("keluarga/$item->id/edit")}}' class="btn btn-primary btn-sm ml-2">Lihat Detail / Edit</a></div></td>
+
                         </tr>  
                         @empty
                             <div class="alert alert-primary" role="alert">

@@ -58,6 +58,13 @@
                         </div>
 
                         <div class="form-group">
+                          <label for="">Nama Ketua RT</label>
+                          <input type="text"
+                            class="form-control" name="nama" value="{{$rt->nama}}" id=""  placeholder="">
+                          <small class="form-text text-muted">Nama RT</small>
+                        </div>
+
+                        <div class="form-group">
                             <div class="form-group">
                               <label for="">Anggota Dari RW</label>
                               <select class="form-control" name="id_rw" id="">

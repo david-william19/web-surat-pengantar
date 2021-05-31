@@ -19,7 +19,14 @@ class KeluargaMid
     {
         if(Auth::guard('keluarga')->check()){
 
-        }else{
+        }else if(Auth::guard('erte')->check()){
+            
+        }else if(Auth::guard('admin')->check()){
+
+        }else if(Auth::guard('erwe')->check()){
+
+        }
+        else{
             abort('403');
         }
 

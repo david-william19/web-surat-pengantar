@@ -10,6 +10,7 @@ class RukunWarga extends Authenticatable
     use HasFactory;
     protected $table = "rukun_warga";
     protected $fillable = [
-        "kode","username","kontak","password","alamat"
+        "nama",
+        "kode", "username", "kontak", "password", "alamat"
     ];
 }

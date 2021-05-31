@@ -98,6 +98,14 @@
                         placeholder="Pekerjaan">
                     <small class="form-text text-muted">Pekerjaan</small>
                 </div>
+              
+                <div class="form-group">
+                  <label for="">Status Pernikahan</label>
+                  <select required class="form-control" name="status_nikah" id="">
+                    <option value="1">Sudah Menikah</option>
+                    <option value="0">Belum Menikah</option>
+                  </select>
+                </div>
 
                 <div class="form-group">
                     <label for="">Alamat Saat Ini</label>
@@ -107,10 +115,10 @@
 
                 <div class="form-group">
                     <input type="hidden" name="id" value="{{ Auth::guard('keluarga')->id() }}">
-                    <p class="card-text">Upload Foto KTP</p>
+                    <p class="card-text">Upload Foto KTP ( Jika Sudah Punya )</p>
 
                     <div class="custom-file">
-                        <input required name="photo" type="file" class="custom-file-input" id="inputGroupFile03">
+                        <input name="photo" type="file" class="custom-file-input" id="inputGroupFile03">
                         <label class="custom-file-label" for="inputGroupFile03">Pilih Foto KTP</label>
                     </div>
                     <small class="form-text text-muted">Masukkan Foto KTP Disini</small>

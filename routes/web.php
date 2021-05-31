@@ -34,3 +34,18 @@ Route::post('registrasi/kepala-keluarga/proceed','KeluargaController@keluargaReg
 Route::post('/login/proc', 'Auth\LoginController@checkLogin');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('keluarga/{id}/buat-surat-pengajuan', 'SuratController@viewKeluargaCreate');
+Route::get('surat/buat-pengajuan', 'SuratController@viewCreate');
+Route::post('surat/store', 'SuratController@store');
+
+Route::get('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@viewEditKeluarga');
+Route::post('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@updateByKeluarga');
+
+Route::get('surat/{id}/edit', 'SuratController@viewEditRtRw');
+Route::post('surat/{id}/update', 'SuratController@updateByRtRw');
+Route::post('surat/{id}/detail', 'SuratController@edit');
+
+
+Route::post('keluarga/{id}/anggota/simpan', 'KeluargaController@storeMember');

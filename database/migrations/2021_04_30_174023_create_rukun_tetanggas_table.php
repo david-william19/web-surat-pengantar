@@ -16,6 +16,7 @@ class CreateRukunTetanggasTable extends Migration
         Schema::create('rukun_tetangga', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
+            $table->string('nama')->nullable();
             $table->string('password');
             $table->string('kontak')->unique();
             $table->string('alamat')->nullable();

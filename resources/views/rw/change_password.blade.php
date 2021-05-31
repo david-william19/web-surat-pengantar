@@ -3,8 +3,8 @@
 @section('page-breadcrumb')
     <div class="row">
         <div class="col-7 align-self-center">
-            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">RT
-                {{ $rt->join_info }}</h3>
+            <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">RW
+                {{ $rw->kode }}</h3>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
@@ -43,10 +43,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-primary text-white rounded-top">
-                <h4 class="mb-0 "> Ganti Password RT</h4>
+                <h4 class="mb-0 "> Ganti Password RW {{$rw->kode}}</h4>
             </div>
             <div class="card-body">
-                <form action="{{ url('rt/'.$rt->id.'/ganti-password') }}" method="post">
+                <form action="{{ url('rw/'.$rw->id.'/ganti-password') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="">Password Lama</label>

@@ -27,11 +27,11 @@
     <!-- ============================================================== -->
 
 
-    @if ($keluarga->photo_kartu_keluarga == null)
+    {{-- @if ($keluarga->photo_kartu_keluarga == null)
         <div class="alert alert-danger" role="alert">
             <strong>Silakan Lengkapi Foto Kartu Keluarga Sebelum Melanjutkan</strong>
         </div>
-    @endif
+    @endif --}}
 
     @include('components.message')
 

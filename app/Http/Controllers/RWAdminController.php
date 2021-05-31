@@ -29,7 +29,13 @@ class RWAdminController extends Controller
                     $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'img','rt'])
+                ->addColumn('warga', function ($row) {
+                    $btn = '<div class="d-flex"><a href="' . url("rw/$row->id/edit") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Edit/Lihat Detail</a>';
+                    $btn .= '<a href="javascript:void(0)" id="' . $row->id . '" class="btn btn-danger btn-sm ml-2 btn-delete">Delete</a>';
+                    return $btn;
+                })
+                
+                ->rawColumns(['action', 'img','warga'])
                 ->make(true);
         }
 
@@ -48,6 +54,7 @@ class RWAdminController extends Controller
         $object = new RukunWarga();
         $object->kode = $request->kode;
         $object->kontak = $request->contact;
+        $object->nama = $request->nama;
         $object->status = "active";
         $object->password = bcrypt($request->password);
         $object->save();
@@ -93,6 +100,7 @@ class RWAdminController extends Controller
         
         $object = RukunWarga::findOrFail($id);
         $object->kode = $request->kode;
+        $object->nama = $request->nama;
         $object->kontak = $request->contact;
         $object->save();
 

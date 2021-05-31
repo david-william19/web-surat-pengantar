@@ -58,6 +58,14 @@
                           <small class="form-text text-muted">Kontak RT</small>
                         </div>
 
+                        
+                        <div class="form-group">
+                            <label for="">Nama Ketua RW</label>
+                            <input type="text"
+                              class="form-control" name="nama" value="{{$rw->nama}}" id=""  placeholder="">
+                            <small class="form-text text-muted">Nama RW</small>
+                          </div>
+
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update Data RW</button>                       

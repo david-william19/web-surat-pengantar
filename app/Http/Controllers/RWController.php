@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Keluarga;
+use App\Models\RukunTetangga;
 use App\Models\RukunWarga;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class RWController extends Controller
@@ -52,6 +54,14 @@ class RWController extends Controller
         return view('rw.change_password')->with(compact('rw'));
     }
 
+    #Lihat RT Anggota
+    function viewMember($id)
+    {
+        $rt = RukunTetangga::where('id_rw','=',$id)->get();
+        $rw = RukunWarga::findOrFail($id);
+        return view('rw.see_rt_member')->with(compact('rt','rw'));
+    }
+
     function changePassword($id, Request $request)
     {
         $user_id = $id;
@@ -59,19 +69,19 @@ class RWController extends Controller
             'new_password' => 'required|min:6',
             'old_password' => 'required|min:6'
         ]);
-        $user = Keluarga::findOrFail($user_id);
+        $user = RukunWarga::findOrFail($user_id);
         $hasher = app('hash');
 
         //If Password Sesuai
         if (!$hasher->check($request->old_password, $user->password)) {
-            return back()->with(["error" => "Password Lama Tidak Sesuai"]);
+            return back()->with(["error" => "Password Lama RW Tidak Sesuai"]);
         } else {
             $user->password = Hash::make($request->new_password);
             $user->save();
             if ($user) {
-                return back()->with(["success" => "Password Berhasil Diperbarui"]);
+                return back()->with(["success" => "Password RW Berhasil Diperbarui"]);
             } else {
-                return back()->with(["error" => "Password Gagal Diperbarui"]);
+                return back()->with(["error" => "Password RW Gagal Diperbarui"]);
             }
         }
     }

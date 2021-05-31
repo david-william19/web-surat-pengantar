@@ -14,11 +14,23 @@
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Anggota Keluarga
                         </span></a>
                 </li>
+              
+                </li>
                 <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/'.Auth::guard('keluarga')->id().'/anggota/tambah') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tambah Anggota
                         </span></a>
                 </li>
-              
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Surat Pengantar</span></li>
+
+                <li class="sidebar-item"><a class="sidebar-link"  href="{{ URL('keluarga/'.Auth::guard('keluarga')->id().'/buat-surat-pengajuan') }}"
+                    aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Ajukan Surat
+                    </span></a>
+                   
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/'.Auth::guard('keluarga')->id().'/status-surat') }}"
+                    aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Status Surat
+                    </span></a>
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>

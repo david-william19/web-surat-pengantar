@@ -29,7 +29,7 @@
 
     <div class="card border-success">
         <div class="card-header bg-success">
-            <h3 class="card-title">Keluarga : {{$currentKeluarga->nama}}</h3>
+            <h3 class="card-title">Keluarga : {{ $currentKeluarga->nama }}</h3>
             <h4 class="mb-0 text-white">Edit Anggota Keluarga : {{ $member->nama }}</h4>
         </div>
         <div class="card-body">
@@ -89,6 +89,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">Status Pernikahan</label>
+                    <select required class="form-control" name="status_nikah" id="">
+                        <option @if ($member->status_pernikahan == 1) selected @endif value="1">Sudah Menikah</option>
+                        <option @if ($member->status_pernikahan == 0) selected @endif value="0">Belum Menikah</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="">Pekerjaan</label>
                     <input required type="text" class="form-control" name="pekerjaan" placeholder="Pekerjaan"
                         value="{{ $member->pekerjaan }}">
@@ -115,11 +123,13 @@
                 <div class="form-group">
                     <label for="">Ganti Keluarga : </label>
                     <select class="form-control" name="id_keluarga" required id="">
-                        <option value="{{$currentKeluarga->id}}">{{ $currentKeluarga->nama.' - '.$currentKeluarga->rt_detail->join_info}}</option>
+                        <option value="{{ $currentKeluarga->id }}">
+                            {{ $currentKeluarga->nama . ' - ' . $currentKeluarga->rt_detail->join_info }}</option>
                         @forelse ($keluarga as $item)
-                            <option value="{{$item->id}}">{{ $item->nama.' - '.$item->rt_detail->join_info}}</option>
+                            <option value="{{ $item->id }}">{{ $item->nama . ' - ' . $item->rt_detail->join_info }}
+                            </option>
                         @empty
-                            
+
                         @endforelse
                     </select>
                 </div>
@@ -143,130 +153,130 @@
 
 
 @section('app-script')
-    <script type="text/javascript"
-        src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8"
-        src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
-    </script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
-    </script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
-    </script>
+<script type="text/javascript"
+    src="https://cdn.datatables.net/v/bs4-4.1.1/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.3/r-2.2.7/sb-1.0.1/sp-1.2.2/datatables.min.js">
+</script>
+<script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+</script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+</script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js">
+</script>
 
 
 
 
-    <script type="text/javascript">
-        $(function() {
-            var table = $('#table_santri').DataTable({
-                processing: true,
-                serverSide: true,
-                columnDefs: [{
-                    orderable: true,
-                    targets: 0
-                }],
-                dom: 'T<"clear">lfrtip<"bottom"B>',
-                "lengthMenu": [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
-                ],
-                buttons: [
-                    'copyHtml5',
-                    {
-                        extend: 'excelHtml5',
-                        title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
-                    },
-                    'csvHtml5',
-                ],
-                ajax: {
-                    async : false,
-                    type: "get",
-                    url: "{{ url('admin/data/santri/manage') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    async: true,
-                    error: function(xhr, error, code) {
-                        var err = eval("(" + xhr.responseText + ")");
-                        console.log(err);
-                    }
+<script type="text/javascript">
+    $(function() {
+        var table = $('#table_santri').DataTable({
+            processing: true,
+            serverSide: true,
+            columnDefs: [{
+                orderable: true,
+                targets: 0
+            }],
+            dom: 'T<"clear">lfrtip<"bottom"B>',
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [
+                'copyHtml5',
+                {
+                    extend: 'excelHtml5',
+                    title: 'Data Santri Export {{ \Carbon\Carbon::now()->year }}'
                 },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'id'
-                    },
-                    {
-                        data: 'nis',
-                        name: 'nis'
-                    },
-                    {
-                        data: 'nama',
-                        name: 'nama'
-                    },
-                    {
-                        data: 'kelas',
-                        name: 'kelas'
-                    },
-                    {
-                        data: 'asrama',
-                        name: 'asrama'
-                    },
-                    {
-                        data: 'jenjang',
-                        name: 'jenjang'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
+                'csvHtml5',
+            ],
+            ajax: {
+                async: false,
+                type: "get",
+                url: "{{ url('admin/data/santri/manage') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                async: true,
+                error: function(xhr, error, code) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    console.log(err);
+                }
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'id'
+                },
+                {
+                    data: 'nis',
+                    name: 'nis'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama'
+                },
+                {
+                    data: 'kelas',
+                    name: 'kelas'
+                },
+                {
+                    data: 'asrama',
+                    name: 'asrama'
+                },
+                {
+                    data: 'jenjang',
+                    name: 'jenjang'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
 
-                ]
-            });
-
-            $('body').on("click", ".btn-delete", function() {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
-                $("#destroy-modal").modal("show")
-            });
-
-            $('body').on("click", ".btn-add-new", function() {
-                var id = $(this).attr("id")
-                $(".btn-destroy").attr("id", id)
-                $("#insert-modal").modal("show")
-            });
-
-
-            // Edit & Update
-            $('body').on("click", ".btn-edit", function() {
-                var id = $(this).attr("id")
-                $.ajax({
-                    url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
-                    method: "GET",
-                    success: function(response) {
-                        $("#edit-modal").modal("show")
-                        console.log(response)
-                        $("#id").val(response.id)
-                        $("#name").val(response.judul)
-                        $("#edit_date").val(response.tanggal)
-                        $("#role").val(response.role)
-                    }
-                })
-            });
-
-            // Reset Password
-            $('body').on("click", ".btn-res-pass", function() {
-                var id = $(this).attr("id")
-                $(".btn-reset").attr("id", id)
-                $("#reset-password-modal").modal("show")
-            });
-
+            ]
         });
 
-    </script>
+        $('body').on("click", ".btn-delete", function() {
+            var id = $(this).attr("id")
+            $(".btn-destroy").attr("id", id)
+            $("#destroy-modal").modal("show")
+        });
+
+        $('body').on("click", ".btn-add-new", function() {
+            var id = $(this).attr("id")
+            $(".btn-destroy").attr("id", id)
+            $("#insert-modal").modal("show")
+        });
+
+
+        // Edit & Update
+        $('body').on("click", ".btn-edit", function() {
+            var id = $(this).attr("id")
+            $.ajax({
+                url: "{{ URL::to('/') }}/mutabaah/" + id + "/fetch",
+                method: "GET",
+                success: function(response) {
+                    $("#edit-modal").modal("show")
+                    console.log(response)
+                    $("#id").val(response.id)
+                    $("#name").val(response.judul)
+                    $("#edit_date").val(response.tanggal)
+                    $("#role").val(response.role)
+                }
+            })
+        });
+
+        // Reset Password
+        $('body').on("click", ".btn-res-pass", function() {
+            var id = $(this).attr("id")
+            $(".btn-reset").attr("id", id)
+            $("#reset-password-modal").modal("show")
+        });
+
+    });
+
+</script>
 
 
 

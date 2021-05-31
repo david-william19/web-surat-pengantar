@@ -53,6 +53,7 @@ class RTAdminController extends Controller
         $object->kode = $request->kode;
         $object->kontak = $request->contact;
         $object->id_rw = $request->id_rw;
+        $object->nama = $request->nama;
         $object->status = "active";
         $object->password = bcrypt($request->password);
         $object->save();
@@ -94,6 +95,7 @@ class RTAdminController extends Controller
         $object->kode = $request->kode;
         $object->id_rw = $request->id_rw;
         $object->kontak = $request->contact;
+        $object->nama= $request->nama;
 
         try {
             $object->save();

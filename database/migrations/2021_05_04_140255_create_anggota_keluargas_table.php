@@ -23,6 +23,7 @@ class CreateAnggotaKeluargasTable extends Migration
             $table->string("tempat_lahir")->nullable();
             $table->date("tanggal_lahir")->nullable();
             $table->string("agama")->nullable();
+            $table->string("status_perkawinan")->nullable();
             $table->string("pendidikan")->nullable();
             $table->string("pekerjaan")->nullable();
             $table->string("current_address")->nullable();

@@ -12,13 +12,14 @@ class RukunTetangga extends Authenticatable
     protected $fillable = [
         "kode",
         "username",
+        "nama",
         "kontak",
         "password",
         "alamat",
         "id_rw"
     ];
 
-    protected $append = ['rw_detail', 'join_info'];
+    protected $append = ['rw_detail', 'join_info','keluarga_count'];
 
     function getRwDetailAttribute()
     {
@@ -29,6 +30,12 @@ class RukunTetangga extends Authenticatable
     {
         $rw = RukunWarga::find($this->id_rw);
         $info = $this->kode . " - " . $rw->kode;
+        return $info;
+    }
+
+    function getKeluargaCountAttribut()
+    {
+        $info = Keluarga::where('rt', '=', $this->id)->count();
         return $info;
     }
 }

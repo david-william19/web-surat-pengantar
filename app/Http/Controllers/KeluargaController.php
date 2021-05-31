@@ -177,10 +177,10 @@ class KeluargaController extends Controller
             'gender' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'status_nikah' => 'required',
             'agama' => 'required',
             'pendidikan' => 'required',
             'pekerjaan' => 'required',
-            'photo' => 'required',
         ];
 
         $customMessages = [
@@ -213,6 +213,7 @@ class KeluargaController extends Controller
         $object->gender = $request->gender;
         $object->tempat_lahir = $request->tempat_lahir;
         $object->tanggal_lahir = $request->tanggal_lahir;
+        $object->status_perkawinan = $request->status_nikah;
         $object->agama = $request->agama;
         $object->pendidikan = $request->pendidikan;
         $object->pekerjaan = $request->pekerjaan;
@@ -239,6 +240,7 @@ class KeluargaController extends Controller
             'gender' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'status_nikah' => 'required',
             'agama' => 'required',
             'pendidikan' => 'required',
             'pekerjaan' => 'required',
@@ -282,6 +284,7 @@ class KeluargaController extends Controller
         $object->id_keluarga = $request->id_keluarga;
         $object->tanggal_lahir = $request->tanggal_lahir;
         $object->agama = $request->agama;
+        $object->status_perkawinan = $request->status_nikah;
         $object->pendidikan = $request->pendidikan;
         $object->pekerjaan = $request->pekerjaan;
         $object->current_address = $request->alamat;
@@ -360,7 +363,8 @@ class KeluargaController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('img', function ($row) {
-                    $img = '  <img style="border-radius:10px !important" class="center-cropped rounded" src="' . url('/') . $row->path_ktp . '" alt="">';
+                    $img = '  <img style="border-radius:10px !important" class="center-cropped rounded" src="' . url('/') . $row->path_ktp . '" alt="" '.
+                    "onerror='imgError(this);'>";
                     return $img;
                 })
                 ->addColumn('gender', function ($row) {

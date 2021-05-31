@@ -18,6 +18,17 @@
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tambah Keluarga
                         </span></a>
                 </li>
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Surat Pengantar</span></li>
+
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rt/'.Auth::guard('erte')->id().'/surat-pengantar') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">List Pengajuan
+                        </span></a>
+                </li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/tambah-keluarga') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Arsip
+                        </span></a>
+                </li>
               
 
                 <li class="list-divider"></li>

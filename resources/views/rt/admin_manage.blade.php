@@ -48,6 +48,7 @@
                                     <th>No</th>
                                     <th>Kode RT</th>
                                     <th>Kontak RT</th>
+                                    <th>Nama Ketua RT</th>
                                     <th>Anggota dari RW</th>
                                     <th>Edit</th>
                                 </tr>
@@ -65,50 +66,6 @@
         </div>
     </div>
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="edit-modalLabel">Edit Data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editForm">
-                        <div class="form-group">
-                            <label for="name">Judul/Nama Agenda Mutaba'ah</label>
-                            <input type="hidden" required="" id="id" name="id" class="form-control">
-                            <input type="" required="" id="name" placeholder="Judul Agenda Mutaba'ah" name="name"
-                                class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="edit_datetime">Tanggal Mutaba'ah</label>
-                            <input type="date" required="" id="edit_date" name="edit_date" class="form-control">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="">Ganti Status Mutaba'ah</label>
-                            <select class="form-control" required name="status" id="new_status">
-                                <option value="">Pilih Status</option>
-                                <option value="1">Dibuka</option>
-                                <option value="0">Ditutup</option>
-                                <option value="3">Pending</option>
-                            </select>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-update">Update</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Edit -->
 
     <!-- Destroy Modal -->
     <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
@@ -135,29 +92,6 @@
         </div>
     </div>
     <!-- Destroy Modal -->
-
-    <!-- Reset Pass Modal -->
-    <div class="modal fade" id="reset-password-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Reset Password</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Password Siswa Akan Direset Menjadi AlbinaaIBS</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-reset">RESET</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <!-- Modal Add New -->
@@ -193,6 +127,10 @@
                         <div class="form-group">
                             <label for="name">Kontak Pengurus RT</label>
                             <input type="" required="" id="txt_in_contact" placeholder="Kontak RT" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nama Pengurus RT</label>
+                            <input type="" required="" id="txt_in_nama" placeholder="Nama Ketua" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="name">Password Untuk Akun Ketua RW</label>
@@ -280,6 +218,10 @@
                     name: 'kontak'
                 },
                 {
+                    data: 'nama',
+                    name: 'kontak'
+                },
+                {
                     data: 'rw',
                     name: 'rw'
                 },
@@ -315,6 +257,7 @@
 
 
         let in_kode = $('#txt_in_kode').val();
+        let in_nama= $('#txt_in_nama').val();
         let in_password = $('#txt_in_password').val();
         let in_contact = $('#txt_in_contact').val();
         let id_rw = $('#id_rw').val();
@@ -322,7 +265,7 @@
         console.log(id_rw);
         
 
-        const myInput = [in_kode, in_contact, in_password,id_rw];
+        const myInput = [in_kode, in_contact, in_password,id_rw,in_nama];
         if (myInput.includes(null) || myInput.includes(undefined) || myInput.includes("")) {
             in_error = true;
         }
@@ -336,6 +279,7 @@
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "kode": in_kode,
+                    "nama": in_nama,
                     "contact": in_contact,
                     "id_rw": id_rw,
                     "password": in_password,

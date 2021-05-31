@@ -136,29 +136,6 @@
     </div>
     <!-- Destroy Modal -->
 
-    <!-- Reset Pass Modal -->
-    <div class="modal fade" id="reset-password-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Reset Password</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Password Siswa Akan Direset Menjadi AlbinaaIBS</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-reset">RESET</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Modal Add New -->
     <div class="modal fade" id="insert-modal" tabindex="-1" role="dialog" aria-labelledby="insert-modalLabel"
@@ -182,6 +159,10 @@
                             <input type="" required="" id="txt_in_contact" placeholder="Kontak RW" class="form-control">
                         </div>
                         <div class="form-group">
+                            <label for="name">Nama RW</label>
+                            <input type="" required="" id="txt_in_nama" placeholder="Nama RW" class="form-control">
+                        </div>
+                        <div class="form-group">
                             <label for="name">Password Untuk Akun Ketua RW</label>
                             <input type="" required="" id="txt_in_password"
                                 placeholder="Password Ini Akan Digunakan Untuk Login" class="form-control">
@@ -196,7 +177,6 @@
             </div>
         </div>
     </div>
-    <!-- Modal Add New -->
 
 
 
@@ -317,12 +297,12 @@
 
             let in_error = false;
 
-
             let in_kode = $('#txt_in_kode').val();
+            let in_nama = $('#txt_in_kode').val();
             let in_password = $('#txt_in_password').val();
             let in_contact = $('#txt_in_contact').val();
 
-            const myInput = [in_kode,  in_contact, in_password];
+            const myInput = [in_kode,  in_contact, in_password,in_nama];
 
             if (myInput.includes(null) || myInput.includes(undefined) || myInput.includes("")) {
                 in_error = true;
@@ -337,6 +317,7 @@
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "kode": in_kode,
+                        "nama": in_nama,
                         "contact": in_contact,
                         "password": in_password,
                     },

@@ -103,8 +103,14 @@
 
                                 </td>
                                 <td>
+                                    @if($item->is_rt_approved == 1 && $item->is_rw_approved == 1)
+                                    <a href='{{url("keluarga/download/$item->id")}}'>
                                     <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Download
                                         Surat</button>
+                                </a>
+                                @else
+                                    <button class="btn btn-secondary">Tidak Dapat Download</button>
+                                @endif
                                 </td>
                             </tr>
                         @empty

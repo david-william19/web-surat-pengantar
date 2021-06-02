@@ -22,6 +22,7 @@
         rel="stylesheet">
 
     <link href="{{ url('bower_components/sweetalert/dist/sweetalert.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/surat.css')}}">
     <link href="{{ url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
     @include('main.styling')

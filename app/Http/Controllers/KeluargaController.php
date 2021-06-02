@@ -6,6 +6,8 @@ use App\Models\AnggotaKeluarga;
 use App\Models\Keluarga;
 use App\Models\RukunTetangga;
 use App\Models\RukunWarga;
+use App\Models\Surat;
+use Barryvdh\DomPDF\Facade as PDF;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -427,5 +429,13 @@ class KeluargaController extends Controller
                 return back()->with(["error" => "Password Gagal Diperbarui"]);
             }
         }
+    }
+
+    function generatePDF($id)
+    {
+        $data = Surat::findOrFail($id);
+        // $data = ['title'=>'hello wrold'];
+        $pdf = PDF::loadView('surat.surat', $data);
+        return $pdf->download('surat-pdf.pdf');
     }
 }

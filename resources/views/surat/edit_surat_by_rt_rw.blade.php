@@ -93,7 +93,7 @@
 
                 <div class="form-group">
                     <strong class="text-dark"><label for="">Nomor Surat</label></strong>
-                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif type="text" required class="form-control" name="nomor_surat"
+                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')->check()) readonly @endif type="text" required class="form-control" name="nomor_surat"
                         aria-describedby="helpId" placeholder="Nomor Surat" value="{{ $surat->nomor_surat }}">
                     <h4 class="form-text">Disesuaikan Penomoran Arsip Surat di RT</h4>
                 </div>

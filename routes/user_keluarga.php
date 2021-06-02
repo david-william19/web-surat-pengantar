@@ -29,6 +29,7 @@ Route::delete('/member/{id}/deleteAjax', 'KeluargaController@deleteMemberAjax');
 Route::get('keluarga/{id}/anggota/tambah', 'KeluargaController@viewAddMember');
 Route::get('keluarga/{id}/anggota', 'KeluargaController@viewManageMember');
 Route::post('keluarga/{id}/anggota/simpan', 'KeluargaController@storeMember');
+Route::get('keluarga/download/{id}','KeluargaController@generatePDF');
 
 Route::group(['prefix' => 'keluarga', 'middleware' => ['keluarga']], function () {
     Route::get('/news/create', 'NewsController@viewAdminCreate');

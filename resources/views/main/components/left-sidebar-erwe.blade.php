@@ -39,6 +39,18 @@
                         <i data-feather="edit-3" class="feather-icon"></i><span class="hide-menu">Info</span></a>
                 </li>
 
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Tanda Tangan dan Cap</span></li>
+
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rw/'.Auth::guard('erwe')->id().'/manage-tanda-tangan') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tanda Tangan
+                        </span></a>
+                </li>
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rw/'.Auth::guard('erwe')->id().'/manage-cap') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Stempel RW
+                        </span></a>
+                </li>
+
                 {{-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                     <i data-feather="power" class="svg-icon mr-2 ml-1"></i>Logout</a> --}}

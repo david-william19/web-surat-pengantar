@@ -2,15 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CapTtdRW;
 use Illuminate\Http\Request;
 use App\Models\Keluarga;
 use App\Models\RukunTetangga;
 use App\Models\RukunWarga;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
 class RWController extends Controller
 {
+
+    function checkIfAuthourized($id)
+    {
+        if (Auth::guard('erwe')->check()) {
+            if (Auth::guard('erwe')->id() != $id) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+
+
     function viewListKeluarga($id){
         $rw = RukunWarga::findOrFail($id);
         $keluarga  = Keluarga::where('rw','=',$id)->get();
@@ -57,9 +75,125 @@ class RWController extends Controller
     #Lihat RT Anggota
     function viewMember($id)
     {
+        if (!$this->checkIfAuthourized($id)) {
+            return abort(403);
+        }
+        
         $rt = RukunTetangga::where('id_rw','=',$id)->get();
         $rw = RukunWarga::findOrFail($id);
         return view('rw.see_rt_member')->with(compact('rt','rw'));
+    }
+
+    function viewManageTTD($id)
+    {
+        if (!$this->checkIfAuthourized($id)) {
+            return abort(403);
+        }
+
+        $ttd = CapTtdRW::where('rw', '=', $id)->where('type', '=', '1')
+            ->orderBy('id', 'DESC')->get();
+        $rw = RukunWarga::findOrFail($id);
+        return view('rw.doc.ttd')->with(compact('rw', 'ttd'));
+    }
+
+    function viewManageCap($id)
+    {
+        if (!$this->checkIfAuthourized($id)) {
+            return abort(403);
+        }
+        $cap = CapTtdRW::where('rw', '=', $id)->where('type', '=', '2')
+            ->orderBy('id', 'DESC')->get();
+        $rw = RukunWarga::findOrFail($id);
+        return view('rw.doc.cap')->with(compact('rw','cap'));
+    }
+
+    public function storeTTD(Request $request)
+    {
+        $rules = [
+            'id_rw' => 'required',
+            'photo' => 'required',
+        ];
+
+        $customMessages = [
+            'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $target = RukunWarga::findOrFail($request->id_rw);
+
+
+        $object = new CapTtdRW();
+        $object->rw = $request->id_rw;
+        $object->type = "1";
+
+        $photoPath = "";
+        if ($request->hasFile('photo')) {
+
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = time() . $target->join_info . '.' . $extension;
+
+            $savePath = "/web_files/ttd/rw/";
+            $savePathDB = "/web_files/ttd/rw/$fileName";
+
+            $path = public_path() . "$savePath";
+            $file->move($path, $fileName);
+
+            $object->path = $savePathDB;
+        }
+
+
+        $object->save();
+
+        if ($object) {
+            return back()->with(["success" => "Berhasil Menyimpan Tanda Tangan RW"]);
+        } else {
+            return back()->with(["error" => "Gagal Menyimpan Tanda Tangan RW"]);
+        }
+    }
+
+    public function storeCap(Request $request)
+    {
+        $rules = [
+            'id_rw' => 'required',
+            'photo' => 'required',
+        ];
+
+        $customMessages = [
+            'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+        $target = RukunWarga::findOrFail($request->id_rw);
+
+        $object = new CapTtdRW();
+        $object->rw = $request->id_rw;
+        $object->type = "2";
+
+        if ($request->hasFile('photo')) {
+
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = time() . $target->join_info . '.' . $extension;
+
+            $savePath = "/web_files/cap/rw/";
+            $savePathDB = "/web_files/cap/rw/$fileName";
+            $path = public_path() . "$savePath";
+            $file->move($path, $fileName);
+
+            $object->path = $savePathDB;
+        }
+
+
+        $object->save();
+
+        if ($object) {
+            return back()->with(["success" => "Berhasil Menambah Stempel RW"]);
+        } else {
+            return back()->with(["error" => "Gagal Menambah Stempel RW"]);
+        }
     }
 
     function changePassword($id, Request $request)

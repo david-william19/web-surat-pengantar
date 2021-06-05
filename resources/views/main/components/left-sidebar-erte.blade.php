@@ -25,11 +25,18 @@
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">List Pengajuan
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('keluarga/tambah-keluarga') }}"
-                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Arsip
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Tanda Tangan dan Cap</span></li>
+
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rt/'.Auth::guard('erte')->id().'/manage-tanda-tangan') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Tanda Tangan
                         </span></a>
                 </li>
-              
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('rt/'.Auth::guard('erte')->id().'/manage-cap') }}"
+                        aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Stempel RT
+                        </span></a>
+                </li>
 
                 <li class="list-divider"></li>
                 <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>

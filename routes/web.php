@@ -40,12 +40,10 @@ Route::get('keluarga/{id}/buat-surat-pengajuan', 'SuratController@viewKeluargaCr
 Route::get('surat/buat-pengajuan', 'SuratController@viewCreate');
 Route::post('surat/store', 'SuratController@store');
 
-Route::get('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@viewEditKeluarga');
-Route::post('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@updateByKeluarga');
+Route::get('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@viewEditKeluarga')->middleware('keluarga');
+Route::post('/keluarga/{id_keluarga}/surat/{id_surat}/edit', 'SuratController@updateByKeluarga')->middleware('keluarga');
 
-Route::get('surat/{id}/edit', 'SuratController@viewEditRtRw');
-Route::post('surat/{id}/update', 'SuratController@updateByRtRw');
-Route::post('surat/{id}/detail', 'SuratController@edit');
+Route::get('surat/{id}/edit', 'SuratController@viewEditRtRw');     // auth check at controller
+Route::post('surat/{id}/update', 'SuratController@updateByRtRw');  // auth check at controller
+Route::post('surat/{id}/detail', 'SuratController@edit');          // auth check at controller
 
-
-Route::post('keluarga/{id}/anggota/simpan', 'KeluargaController@storeMember');

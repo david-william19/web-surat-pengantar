@@ -19,7 +19,6 @@ Route::group(['middleware' => ['keluarga']], function () {
 
 
 
-
 //Crud Member
 Route::get('/member/{id}/edit', 'KeluargaController@viewEditMember');
 Route::get('/member/{id}/detail', 'KeluargaController@viewDetailMember');

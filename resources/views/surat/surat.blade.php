@@ -94,8 +94,8 @@
                 </td>
             </tr>
             <tr>
-                <td><p class="mb-5">Sekretariat. Kp : ................</p></td>
-                <td class="text-center"><p class="mb-5">Telepon : ................</p></td>
+                <td><p class="mb-5">Sekretariat RT : {{$sekretariat}}.</p></td>
+                <td class="text-center"><p class="mb-5">Telepon : {{$telepon}}</p></td>
                 <td class="text-right"><p class="mb-5">Kode Pos : ................</p></td>
                 
             </tr>
@@ -138,7 +138,7 @@
                         </div>
                         <div class="section-right">
                             <p>: {{$nama_lengkap}}</p>
-                            <p>: Kompleks Anggrek</p>
+                            <p>: {{$alamat_pemohon}}</p>
                             <p>: {{$tempat}}, {{$tanggal_lahir}}</p>
                             <p>: {{$pekerjaan}}</p>
                             <p>: {{$agama}}</p>
@@ -148,7 +148,7 @@
                                 Sudah Kawin
                                 @endif
                             </p>
-                            <p>: .................................</p>
+                            <p>: {{$nik}}</p>
                         </div>
                         <div class="clear"></div>
                     </div>

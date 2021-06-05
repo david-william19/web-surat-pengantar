@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Keluarga;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class KeluargaMid
+class RukunTetanggaMid
 {
     /**
      * Handle an incoming request.
@@ -18,16 +17,9 @@ class KeluargaMid
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::guard('keluarga')->check()){
-            $keluarga = Keluarga::findOrFail(Auth::guard('keluarga')->id());
-        }else if(Auth::guard('erte')->check()){
-            
-        }else if(Auth::guard('admin')->check()){
+        if(Auth::guard('erwe')->check()){
 
-        }else if(Auth::guard('erwe')->check()){
-
-        }
-        else{
+        }else{
             abort('403');
         }
 

@@ -56,7 +56,7 @@
                     <strong class="text-dark"><label for="">Status Pernikahan</label></strong>
                     <input readonly type="text" required class="form-control" @if ($surat->status_perkawinan == 1) value="Menikah"
                     @else
-                                                                    value="Belum Menikah" @endif>
+                                                                        value="Belum Menikah" @endif>
                 </div>
                 <div class="form-group col-md-6 col-12">
                     <strong class="text-dark"><label for="">Foto KTP</label></strong><br>
@@ -100,33 +100,29 @@
 
                 <div class="form-group">
                     <strong class="text-dark"><label for="">Ketua RT</label></strong>
-                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif
-                        type="text" required class="form-control" name="nama_rt" aria-describedby="helpId"
-                        placeholder="Nomor Surat" value="{{ $surat->nama_rt }}">
+                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif type="text" required class="form-control" name="nama_rt"
+                        aria-describedby="helpId" placeholder="Nomor Surat" value="{{ $surat->nama_rt }}">
                     <h5 class="form-text">Nama Ketua RT</h5>
                 </div>
 
                 <div class="form-group">
                     <strong class="text-dark"><label for="">Ketua RW</label></strong>
-                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif
-                        type="text" required class="form-control" name="nama_rw" aria-describedby="helpId"
-                        placeholder="Nomor Surat" value="{{ $surat->nama_rw }}">
+                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif type="text" required class="form-control" name="nama_rw"
+                        aria-describedby="helpId" placeholder="Nomor Surat" value="{{ $surat->nama_rw }}">
                     <h5 class="form-text">Nama Ketua RW</h5>
                 </div>
 
                 <div class="form-group">
                     <strong class="text-dark"><label for="">Sekretariat RT</label></strong>
-                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif
-                        type="text" class="form-control" name="sekretariat_rt" aria-describedby="helpId"
-                        placeholder="Nomor Surat" value="{{ $surat->sekretariat }}">
+                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif type="text" class="form-control" name="sekretariat_rt"
+                        aria-describedby="helpId" placeholder="Nomor Surat" value="{{ $surat->sekretariat }}">
                     <h4 class="form-text">Disesuaikan Penomoran Arsip Surat di RT</h4>
                 </div>
 
                 <div class="form-group">
                     <strong class="text-dark"><label for="">Kontak RT</label></strong>
-                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif
-                        type="text" class="form-control" name="keperluan_surat" aria-describedby="helpId"
-                        placeholder="Nomor Surat" value="{{ $surat->telepon }}">
+                    <input @if (Auth::guard('erwe')->check() || Auth::guard('admin')) readonly @endif type="text" class="form-control" name="telepon"
+                        aria-describedby="helpId" placeholder="Nomor Surat" value="{{ $surat->telepon }}">
                     <h4 class="form-text">Kontak RT</h4>
                 </div>
 
@@ -141,14 +137,15 @@
                         <label for="">RT Menyetujui Surat Pengantar :
                             ??</label>
                         <select required class="form-control" name="status_rt" id="">
-                            <option value="1">Ya</option>
-                            <option value="0">Tidak</option>
+                            <option @if ($surat->is_rt_approved == 1) selected @endif
+                                value="1">Ya</option>
+                            <option value="0"  @if ($surat->is_rt_approved == 0) selected @endif>Tidak</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="">RW Menyetujui Surat Pengantar : </label>
-                        <input type="hidden" name="status_rw" value="{{ $surat->is_rt_approved }}">
+                        <input type="hidden" name="status_rw" value="{{ $surat->is_rw_approved }}">
                         <select disabled required class="form-control" id="">
                             @if ($surat->is_rw_approved == 1)
                                 <option value="1">Ya</option>

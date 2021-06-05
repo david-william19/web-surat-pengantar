@@ -3,18 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnggotaKeluarga;
+use App\Models\CapTtdRT;
+use App\Models\CapTtdRW;
 use App\Models\Keluarga;
 use App\Models\RukunTetangga;
 use App\Models\RukunWarga;
 use App\Models\Surat;
 use App\Models\Warga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SuratController extends Controller
 {
+    function checkIfRTAuthourized($id)
+    {
+        if (Auth::guard('erte')->check()) {
+            if (Auth::guard('erte')->id() != $id) {
+                return false;
+            } else {
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+    function checkIfRWAuthourized($id)
+    {
+        if (Auth::guard('erwe')->check()) {
+            if (Auth::guard('erwe')->id() != $id) {
+                return false;
+            } else {
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+
 
     public function viewInitKeluargaCreate($id)
     {
+
+        if (Auth::guard('keluarga')->check()) {
+            $keluarga = Keluarga::findOrFail(Auth::guard('keluarga')->id());
+            if ($keluarga->photo_kartu_keluarga == null) {
+                return redirect('/keluarga')->with(["error" => "Lengkapi Data Sebelum Membuat Surat Pengajuan"]);
+            }
+        }
+
+
         $keluarga = Keluarga::findOrFail($id);
         $allMember = AnggotaKeluarga::where('id_keluarga', '=', $id)->get();
         return view('surat.new_request')->with(compact('keluarga', 'allMember'));
@@ -24,7 +62,7 @@ class SuratController extends Controller
     public function viewTrackingByKeluarga($id)
     {
         $keluarga = Keluarga::findOrFail($id);
-        $surat = Surat::where('id_keluarga', '=', $id)->get();
+        $surat = Surat::where('id_keluarga', '=', $id)->orderBy('id', 'DESC')->get();
         return view('surat.tracking')->with(compact('keluarga', 'surat'));
     }
 
@@ -32,8 +70,12 @@ class SuratController extends Controller
     // ID Disini menandakan id rt
     public function viewTrackingByRT($id)
     {
+        if (!$this->checkIfRTAuthourized($id)) {
+            return abort(403);
+        }
+
         $keluarga = Keluarga::findOrFail($id);
-        $surat = Surat::where('id_rt', '=', $id)->get();
+        $surat = Surat::where('id_rt', '=', $id)->orderBy('id', 'DESC')->get();
         return view('surat.tracking')->with(compact('keluarga', 'surat'));
     }
 
@@ -41,21 +83,32 @@ class SuratController extends Controller
     // ID Disini menandakan id rw
     public function viewTrackingByRW($id)
     {
-        $surat = Surat::where('id_rw', '=', $id)->get();
+        if (!$this->checkIfRWAuthourized($id)) {
+            return abort(403);
+        }
+
+        $surat = Surat::where('id_rw', '=', $id)->orderBy('id', 'DESC')->get();
         return view('surat.tracking')->with(compact('surat'));
     }
 
     // View Edit Surat By Admin
     public function viewTrackingByAdmin()
     {
-        $surat = Surat::where('status', '=', 1)->get();
+        $surat = Surat::where('status', '=', 1)->orderBy('id', 'DESC')->get();
         return view('surat.tracking')->with(compact('surat'));
     }
 
-     // View Create Surat By Keluarga , 
+    // View Create Surat By Keluarga , 
     // Keluarga hanya bisa menentukan anggota keluarga , keterangan, dan keperluan surat
     public function viewKeluargaCreate($id)
     {
+        if (Auth::guard('keluarga')->check()) {
+            $keluarga = Keluarga::findOrFail(Auth::guard('keluarga')->id());
+            if ($keluarga->photo_kartu_keluarga == null) {
+                return redirect('/keluarga')->with(["error" => "Lengkapi Data Sebelum Membuat Surat Pengajuan"]);
+            }
+        }
+
         $keluarga = Keluarga::findOrFail($id);
         $allMember = AnggotaKeluarga::where('id_keluarga', '=', $id)->get();
         return view('surat.new_request')->with(compact('keluarga', 'allMember'));
@@ -75,7 +128,21 @@ class SuratController extends Controller
     // View Edit Surat By RT , RW , 
     public function viewEditRtRW($id_surat)
     {
+
         $surat = Surat::findOrFail($id_surat);
+    
+        $suratRWID = $surat->id_rw;
+        $suratRTID = $surat->id_rt;
+        
+        if (!$this->checkIfRWAuthourized($suratRWID)) {
+            return abort(403);
+        }
+
+        
+        if (!$this->checkIfRTAuthourized($suratRTID)) {
+            return abort(403);
+        }
+
         $keluarga = Keluarga::findOrFail($surat->id_keluarga);
         $warga = AnggotaKeluarga::findOrFail($surat->id_warga);
         return view('surat.edit_surat_by_rt_rw')->with(compact('keluarga', 'surat', 'warga'));
@@ -111,6 +178,8 @@ class SuratController extends Controller
         $object->id_rw = $rw->id;
         $object->id_rt = $rt->id;
         $object->nama_lengkap = $warga->nama;
+        $object->nik = $warga->nik;
+        $object->alamat_pemohon = $warga->current_address;
         $object->tempat = $warga->tempat_lahir;
         $object->tanggal_lahir = $warga->tanggal_lahir;
         $object->pekerjaan = $warga->pekerjaan;
@@ -191,7 +260,7 @@ class SuratController extends Controller
     // Disini Nama RT,RW,Alamat RT,RW,dimungkinkan berubah 
     // Keluarga hanya bisa edit anggota, keperluan,dan keterangan
     // Yang Tidak Bisa Diedit : Asal Keluarga
-    public function updateByRtRw(Request $request,$id_surat)
+    public function updateByRtRw(Request $request, $id_surat)
     {
         $rules = [
             "nomor_surat" => "required",
@@ -206,18 +275,51 @@ class SuratController extends Controller
             'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
         ];
 
-        
+
         $this->validate($request, $rules, $customMessages);
 
         $object = Surat::findOrFail($id_surat);
-     
+
         $object->keperluan = $request->keperluan_surat;
         $object->nama_rt = $request->nama_rt;
         $object->nomor_surat = $request->nomor_surat;
         $object->nama_rw = $request->nama_rw;
-        $object->is_rt_approved = $request->status_rt;
+
+        if (Auth::guard('erte')->check()) {
+            $pathTTD =CapTtdRT::where('type', '=', '1')->where('rt','=',$object->id_rt)->first();
+            if ($pathTTD == null) {
+                return back()->with(["error" => "Surat Belum Bisa diproses, RT Belum Melengkapi Tanda Tangan RT"]);
+            }
+            $pathCAP = CapTtdRT::where('type', '=', '2')->where('rt','=',$object->id_rt)->first();
+            if ($pathCAP == null) {
+                return back()->with(["error" => "Surat Belum Bisa diproses, RT Belum Melengkapi Stempel RT"]);
+            }
+            $object->id_cap_rt = $pathCAP->path;
+            $object->id_ttd_rt = $pathTTD->path;
+        }
+
+        if (Auth::guard('erwe')->check()) {
+            $pathTTD = CapTtdRW::where('type', '=', '1')->where('rw','=',$object->id_rw)->first();
+            if ($pathTTD == null) {
+                return back()->with(["error" => "Surat Belum Bisa diproses, RW Belum Melengkapi Tanda Tangan RW"]);
+            }
+            $pathCAP =CapTtdRW::where('type', '=', '2')->where('rw','=',$object->id_rw)->first();
+            if ($pathCAP == null) {
+                return back()->with(["error" => "Surat Belum Bisa diproses, RW Belum Melengkapi Stempel RW"]);
+            }
+            $object->id_cap_rw = $pathCAP->path;
+            $object->id_ttd_rw = $pathTTD->path;
+        }
+
         $object->is_rw_approved = $request->status_rw;
-        $object->status = false;
+        $object->is_rt_approved = $request->status_rt;
+
+
+        if ($object->is_rt_approved && $object->is_rw_approved) {
+            $object->status = true;
+        } else {
+            $object->status = false;
+        }
         $object->save();
 
         if ($object) {

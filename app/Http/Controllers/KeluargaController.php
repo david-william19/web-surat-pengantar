@@ -16,9 +16,36 @@ use Yajra\DataTables\Facades\DataTables;
 
 class KeluargaController extends Controller
 {
+    
+    
+    function checkIfAuthourized($id)
+    {
+        if (Auth::guard('keluarga')->check()) {
+            if (Auth::guard('keluarga')->id() != $id) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+
+
+    function checkIfKeluargaDocumentComplete()
+    {
+        if (Auth::guard('keluarga')->check()) {
+            $keluarga = Keluarga::findOrFail(Auth::guard('keluarga')->id());
+            if ($keluarga->photo_kartu_keluarga == null) {
+                return redirect('/keluarga')->with(['errors' => "Lengkapi Data Terlebih Dahulu"]);
+            }
+        }
+    }
 
     public function dashboard()
     {
+        
         $getRT = RukunTetangga::all();
 
         $rt = array();
@@ -127,11 +154,11 @@ class KeluargaController extends Controller
         return $request->all();
     }
 
-    function changeKKPhoto(Request $request,$id_kel)
+    function changeKKPhoto(Request $request, $id_kel)
     {
         $id = $request->id;
-        if ($id==null) {
-            $id=$id_kel;
+        if ($id == null) {
+            $id = $id_kel;
         }
         $user = Keluarga::findOrFail($id);
 
@@ -167,10 +194,10 @@ class KeluargaController extends Controller
 
     //member section
 
-    public function storeMember(Request $request,$id_kel)
+    public function storeMember(Request $request, $id_kel)
     {
         $id = ($request->id);
-        if ($id==null) {
+        if ($id == null) {
             $id = $id_kel;
         }
         $rules = [
@@ -301,28 +328,53 @@ class KeluargaController extends Controller
         }
     }
 
-    public function viewAddMember(Request $request,$id)
+    public function viewAddMember(Request $request, $id)
     {
-        $keluarga=Keluarga::findOrFail($id);
+        if (Auth::guard('keluarga')->check()) {
+            $keluarga = Keluarga::findOrFail(Auth::guard('keluarga')->id());
+            if ($keluarga->photo_kartu_keluarga == null) {
+                return redirect('/keluarga')->with(["error" => "Lengkapi Data Sebelum Menambah Anggota Keluarga"]);
+            }
+        }
+
+        if (!$this->checkIfAuthourized($id)) {
+            return abort(403);
+        }
+
+
+        $keluarga = Keluarga::findOrFail($id);
         return view('anggota_keluarga.keluarga_add')->with(compact('keluarga'));
     }
 
-    public function viewManageMember(Request $request,$id)
+    public function viewManageMember(Request $request, $id)
     {
-        $keluarga=Keluarga::findOrFail($id);
+        if (!$this->checkIfAuthourized($id)) {
+            return abort(403);
+        }
+
+        $keluarga = Keluarga::findOrFail($id);
         return view('anggota_keluarga.keluarga_manage')->with(compact('keluarga'));
     }
 
     function viewEditMember(Request $request, $id)
     {
+        
+  
+
+        
         $member = AnggotaKeluarga::findOrFail($id);
+
+        $keluarga_id = $member->id_keluarga;
+        if (!$this->checkIfAuthourized($keluarga_id)) {
+            return abort(403);
+        }
         $currentKeluargaId = $member->id_keluarga;
         $currentKeluarga = Keluarga::findOrFail($currentKeluargaId);
         $rt = RukunTetangga::all();
-        $keluarga = Keluarga::where('rt','=',$currentKeluarga->rt)->get();
-        return view('anggota_keluarga.keluarga_edit')->with(compact('member','rt','keluarga','currentKeluarga'));
+        $keluarga = Keluarga::where('rt', '=', $currentKeluarga->rt)->get();
+        return view('anggota_keluarga.keluarga_edit')->with(compact('member', 'rt', 'keluarga', 'currentKeluarga'));
     }
-    
+
     function viewAddNew(Request $request)
     {
         $rt = RukunTetangga::all();
@@ -331,7 +383,15 @@ class KeluargaController extends Controller
 
     function viewDetailMember(Request $request, $id)
     {
+
         $member = AnggotaKeluarga::findOrFail($id);
+
+
+        $keluarga_id = $member->id_keluarga;
+        if (!$this->checkIfAuthourized($keluarga_id)) {
+            return abort(403);
+        }
+
         return view('anggota_keluarga.keluarga_see')->with(compact('member'));
     }
 
@@ -365,8 +425,8 @@ class KeluargaController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('img', function ($row) {
-                    $img = '  <img style="border-radius:10px !important" class="center-cropped rounded" src="' . url('/') . $row->path_ktp . '" alt="" '.
-                    "onerror='imgError(this);'>";
+                    $img = '  <img style="border-radius:10px !important" class="center-cropped rounded" src="' . url('/') . $row->path_ktp . '" alt="" ' .
+                        "onerror='imgError(this);'>";
                     return $img;
                 })
                 ->addColumn('gender', function ($row) {
@@ -385,7 +445,7 @@ class KeluargaController extends Controller
                     $btn = '<div class="d-flex"><a href="' . url("member/$row->id/detail") . '" id="' . $row->id . '" class="btn btn-primary btn-sm ml-2">Lihat Detail</a>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'gender', 'img','detail'])
+                ->rawColumns(['action', 'gender', 'img', 'detail'])
                 ->make(true);
         }
     }
@@ -404,7 +464,7 @@ class KeluargaController extends Controller
     {
         $keluarga = Keluarga::findOrFail($id);
         $rt = RukunTetangga::all();
-        return view('keluarga.keluarga_info_edit')->with(compact('keluarga','rt'));
+        return view('keluarga.keluarga_info_edit')->with(compact('keluarga', 'rt'));
     }
 
     function changePassword($id, Request $request)

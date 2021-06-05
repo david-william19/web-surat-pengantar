@@ -15,7 +15,7 @@ class Surat extends Model
         "agama","status_perkawinan","keterangan","current_rt",
         "current_rt","current_rw","nama_rt","nama_rt","sekretariat",
         "telepon","kodepos","is_rt_approved","is_rw_approved",
-        "id_cap_rt","id_cap_rw","id_ttd_rt","id_ttd_rw","status"
+        "id_cap_rt","id_cap_rw","id_ttd_rt","id_ttd_rw","status","alamat_pemohon"
     ];
   
     

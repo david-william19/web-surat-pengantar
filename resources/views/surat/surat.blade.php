@@ -195,7 +195,10 @@
                     <div class="text-right margin-top">
                         <p style="margin-right: 6px;">Mengetahui</p>
                         <b>KETUA RW</b>
-                        <div class="sign" style="margin-left: auto"></div>
+                        <div class="sign" style="margin-left: auto">
+                        <img src="{{asset($id_ttd_rw)}}" alt="" style="width: 100%; position:absolute; z-index:1;">
+                        <img src="{{asset($id_cap_rw)}}" alt="" style="width: 100%;">
+                        </div>
                         <p>({{$nama_rw}})</p>
                     </div>
                 </td>
@@ -204,7 +207,10 @@
                     <div class="margin-top">
                         <p>..........................</p>
                         <b>KETUA RT</b>
-                        <div class="sign"></div>
+                        <div class="sign">
+                        <img src="{{asset($id_ttd_rt)}}" alt="" style="width: 100%; position:absolute; z-index:1;">
+                        <img src="{{asset($id_cap_rt)}}" alt="" style="width: 100%;">
+                        </div>
                         <p>({{$nama_rt}})</p>
                     </div>
                 </td>

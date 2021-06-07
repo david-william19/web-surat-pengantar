@@ -498,4 +498,11 @@ class KeluargaController extends Controller
         $pdf = PDF::loadView('surat.surat', $data);
         return $pdf->download('surat-pdf.pdf');
     }
+
+    function generatePDFraw($id){
+        $data = Surat::findOrFail($id);
+        // $data = ['title'=>'hello wrold'];
+        $pdf = PDF::loadView('surat.surat_template', $data);
+        return $pdf->download('surat-pdf.pdf');
+    }
 }

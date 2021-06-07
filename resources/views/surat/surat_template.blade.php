@@ -80,22 +80,22 @@
     <body>
         <table class="center">
             <tr>
-                <td><b>RUKUN TETANGGA : ................</b></td>
+                <td><b>RUKUN TETANGGA : {{$current_rt}}</b></td>
                 <td></td>
                 <td class="text-right">
-                    <b>DESA/KELURAHAN : ................</b>
+                    <b>DESA/KELURAHAN : Sukapura</b>
                 </td>
             </tr>
             <tr>
-                <td><b>RUKUN WARGA : ................</b></td>
+                <td><b>RUKUN WARGA : {{$current_rw}}</b></td>
                 <td></td>
                 <td class="text-right ">
-                    <b class="mb-5">KECAMATAN : ................................</b>
+                    <b class="mb-5">KECAMATAN : Bojongsoang</b>
                 </td>
             </tr>
             <tr>
-                <td><p class="mb-5">Sekretariat. Kp : ................</p></td>
-                <td class="text-center"><p class="mb-5">Telepon : ................</p></td>
+                <td><p class="mb-5">Sekretariat RT : {{$sekretariat}}.</p></td>
+                <td class="text-center"><p class="mb-5">Telepon : {{$telepon}}</p></td>
                 <td class="text-right"><p class="mb-5">Kode Pos : ................</p></td>
                 
             </tr>
@@ -107,18 +107,18 @@
             </tr>
             <tr>
                 <td colspan="3" class="text-center">
-                    <p>Nomor : ....../....../....../......</p>
+                    <p>Nomor : {{$nomor_surat}}</p>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">
                     <div class="section-center margin-top">
                         <p>
-                            Yang bertanda tangan dibawah ini, Ketua RT,....,
-                            RW,.... Desa/Kelurahan: .................
+                            Yang bertanda tangan dibawah ini, Ketua {{$current_rt}},
+                            {{$current_rw}} Desa/Kelurahan: Sukapura
                         </p>
                         <p>
-                            Kecamatan ........................, Kabupaten
+                            Kecamatan Bojongsoang, Kabupaten
                             Bandung, dengan ini menerangkan bahwa :
                         </p>
                     </div>
@@ -137,13 +137,18 @@
                             <p>No. KTP</p>
                         </div>
                         <div class="section-right">
-                            <p>: .................................</p>
-                            <p>: .................................</p>
-                            <p>: .................................</p>
-                            <p>: .................................</p>
-                            <p>: .................................</p>
-                            <p>: .................................</p>
-                            <p>: .................................</p>
+                            <p>: {{$nama_lengkap}}</p>
+                            <p>: {{$alamat_pemohon}}</p>
+                            <p>: {{$tempat}}, {{$tanggal_lahir}}</p>
+                            <p>: {{$pekerjaan}}</p>
+                            <p>: {{$agama}}</p>
+                            <p>: @if($status_perkawinan == 0)
+                                Belum Kawin
+                                @else
+                                Sudah Kawin
+                                @endif
+                            </p>
+                            <p>: {{$nik}}</p>
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -167,12 +172,9 @@
             <tr>
                 <td colspan="3">
                     <div class="section-center">
-                        <p>
-                            ................................................................................................................................
-                        </p>
-                        <p>
-                            ................................................................................................................................
-                        </p>
+                        <b style="margin: 10px 0;">
+                            {{$keperluan}}
+                        </b>
                     </div>
                 </td>
             </tr>
@@ -193,8 +195,9 @@
                     <div class="text-right margin-top">
                         <p style="margin-right: 6px;">Mengetahui</p>
                         <b>KETUA RW</b>
-                        <div class="sign" style="margin-left: auto"></div>
-                        <p>(.........................)</p>
+                        <div class="sign" style="margin-left: auto">
+                        </div>
+                        <p>(....................)</p>
                     </div>
                 </td>
                 <td></td>
@@ -202,8 +205,9 @@
                     <div class="margin-top">
                         <p>..........................</p>
                         <b>KETUA RT</b>
-                        <div class="sign"></div>
-                        <p>(.........................)</p>
+                        <div class="sign">
+                        </div>
+                        <p>(....................)</p>
                     </div>
                 </td>
             </tr>

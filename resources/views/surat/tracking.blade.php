@@ -103,11 +103,9 @@
 
                                 </td>
                                 <td>
-                                    @if($item->is_rt_approved == 1 && $item->is_rw_approved == 1)
-                                    <a href='{{url("keluarga/download/$item->id")}}'>
-                                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block">Download
+                                    @if($item->is_rt_approved == 1 && $item->is_rw_approved == 1)                                 
+                                    <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#download-modal">Download
                                         Surat</button>
-                                </a>
                                 @else
                                     <button class="btn btn-secondary">Tidak Dapat Download</button>
                                 @endif
@@ -128,23 +126,27 @@
 
 
     <!-- Destroy Modal -->
-    <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
+    <div class="modal fade" id="download-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Yakin Ingin Menghapus Anggota Keluarga Ini ?</h5>
+                    <h5 class="modal-title" id="destroy-modalLabel">Anda ingin mendownload file ?</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h5>Aksi Ini akan menghapus seluruh data surat yang dikirimkan anggota keluarga ini</h5>
+                    <h5>Download file sesuai kebutuhan anda</h5>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-destroy">Hapus</button>
+                <a href='{{url("keluarga/download/raw/$item->id")}}'>
+                    <button type="button" class="btn btn-primary">Download Mentah</button>
+                </a>
+                <a href='{{url("keluarga/download/$item->id")}}'>
+                    <button type="button" class="btn btn-success">Download beserta Validasi</button>
+                </a>
                 </div>
             </div>
         </div>

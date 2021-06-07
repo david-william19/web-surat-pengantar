@@ -109,34 +109,6 @@
         </div>
         </div>
     </div>
-
-
-    <!-- Destroy Modal -->
-    <div class="modal fade" id="destroy-modal" tabindex="-1" role="dialog" aria-labelledby="destroy-modalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="destroy-modalLabel">Yakin Ingin Menghapus Anggota Keluarga Ini ?</h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5>Aksi Ini akan menghapus seluruh data surat yang dikirimkan anggota keluarga ini</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-danger btn-destroy">Hapus</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Destroy Modal -->
-
-
-
 @endsection
 
 

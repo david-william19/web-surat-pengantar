@@ -29,6 +29,7 @@ Route::get('keluarga/{id}/anggota/tambah', 'KeluargaController@viewAddMember');
 Route::get('keluarga/{id}/anggota', 'KeluargaController@viewManageMember');
 Route::post('keluarga/{id}/anggota/simpan', 'KeluargaController@storeMember');
 Route::get('keluarga/download/{id}','KeluargaController@generatePDF');
+Route::get('keluarga/download/raw/{id}','KeluargaController@generatePDFraw');
 
 Route::group(['prefix' => 'keluarga', 'middleware' => ['keluarga']], function () {
     Route::get('/news/create', 'NewsController@viewAdminCreate');

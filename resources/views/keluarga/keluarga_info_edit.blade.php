@@ -271,7 +271,8 @@
 
         });
 
-
+        var xhr = new XMLHttpRequest();
+        
         $(".btn-destroy").on("click", function() {
             var id = $(this).attr("id")
             console.log(id);
@@ -284,7 +285,7 @@
                 method: "DELETE",
                 success: function(response) {
 
-                    if (response == 1) {
+                    if (response == 0) {
                         swal("Sukses", "Berhasil Menghapus Anggota Keluarga", "success");
                     } else {
                         swal("Error", "Gagal Menghapus Anggota Keluarga ", "error");

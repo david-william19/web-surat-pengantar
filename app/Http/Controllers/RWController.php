@@ -36,7 +36,8 @@ class RWController extends Controller
     }
 
     function listKeluarga(){
-        return Keluarga::all();
+        $keluarga = Keluarga::all();
+        return view('rw.list_warga')->with(compact('keluarga'));
     }
 
     function getKeluargaAjax(Request $request,$id)

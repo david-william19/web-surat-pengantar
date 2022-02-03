@@ -23,7 +23,7 @@ Route::group(['middleware' => ['rw']], function () {
     
     Route::get('/rw/{id}/surat-pengantar', 'SuratController@viewTrackingByRW');
     
-    Route::get('/list_keluarga','RWController@listKeluarga');
+    Route::get('rw/list_keluarga','RWController@listKeluarga');
 
     Route::get('/rw/{id}/manage-tanda-tangan', 'RWController@viewManageTTD');
     Route::get('/rw/{id}/manage-cap', 'RWController@viewManageCap');

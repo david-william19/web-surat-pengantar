@@ -57,8 +57,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn  waves-effect waves-light  btn-rounded btn-outline-success">Simpan
-                        Simpan</button>
+                    <button type="submit" class="btn  waves-effect waves-light  btn-rounded btn-outline-success">Simpan</button>
                 </form>
             </div>
         </div>

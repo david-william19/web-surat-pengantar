@@ -12,16 +12,24 @@ class AnggotaKeluarga extends Model
 
     protected $fillable=[
         "id_keluarga",
-        "nik",
         "nama",
         "gender",
         "tempat_lahir",
         "tanggal_lahir",
+        "status_dalam_keluarga",
+        "status_perkawinan",
         "agama",
+        "current_address",
+        "golongan_darah",
+        "kewarganegaraan",
         "pendidikan",
         "pekerjaan",
-        "current_address",
-        "path_ktp",
+        "akseptor_kb",
+        "penyandang_cacat",
+        "status_kepemilikan_rumah",
+        "penghasilan_perbulan",
+        "pengeluaran_perbulan",
+        "kepemilikan_lahan",
     ];
 
     

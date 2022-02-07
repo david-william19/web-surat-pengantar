@@ -22,12 +22,20 @@ class CreateAnggotaKeluargasTable extends Migration
             $table->string("gender");
             $table->string("tempat_lahir")->nullable();
             $table->date("tanggal_lahir")->nullable();
-            $table->string("agama")->nullable();
+            $table->string("status_dalam_keluarga")->nullable();
             $table->string("status_perkawinan")->nullable();
+            $table->string("agama")->nullable();
+            $table->string("current_address")->nullable();
+            $table->string("golongan_darah")->nullable();
+            $table->string("kewarganegaraan")->nullable();
             $table->string("pendidikan")->nullable();
             $table->string("pekerjaan")->nullable();
-            $table->string("current_address")->nullable();
-            $table->string("path_ktp")->nullable();
+            $table->string("akseptor_kb")->nullable();
+            $table->string("penyandang_cacat")->nullable();
+            $table->string("status_kepemilikan_rumah")->nullable();
+            $table->integer("penghasilan_perbulan")->nullable();
+            $table->integer("pengeluaran_perbulan")->nullable();
+            $table->string("kepemilikan_lahan")->nullable();
             $table->timestamps();
         });
     }

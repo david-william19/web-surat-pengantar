@@ -87,7 +87,6 @@ class RWAdminController extends Controller
             'required' => 'Mohon Isi Kolom :attribute terlebih dahulu'
         ];
 
-     
 
         $this->validate($request, $rules, $customMessages);
 

@@ -31,7 +31,7 @@ class CreateAnggotaKeluargasTable extends Migration
             $table->string("pendidikan")->nullable();
             $table->string("pekerjaan")->nullable();
             $table->string("akseptor_kb")->nullable();
-            $table->string("penyandang_cacat")->nullable();
+            $table->boolean("penyandang_cacat")->nullable();
             $table->string("status_kepemilikan_rumah")->nullable();
             $table->integer("penghasilan_perbulan")->nullable();
             $table->integer("pengeluaran_perbulan")->nullable();

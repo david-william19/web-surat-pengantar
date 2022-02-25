@@ -50,7 +50,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->nama}}</td>
                             <td><img style="border-radius:10px !important" class="center-cropped rounded" src="{{url('/') . $item->photo_kartu_keluarga}}" alt=""
-                                onerror="this.onerror=null;this.src='{{url('/').'/img/onerror.png'}}';"
+                                onerror="this.onerror=null;this.src='{{url('/').'/img/onerror.png;'}}'"
                                 ></td>
                             <td><div class="d-flex">
                                 @if (Auth::guard('erte')->check())

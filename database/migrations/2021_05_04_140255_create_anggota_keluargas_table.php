@@ -24,7 +24,7 @@ class CreateAnggotaKeluargasTable extends Migration
             $table->date("tanggal_lahir")->nullable();
             $table->enum("status_dalam_keluarga", ['Kepala Keluarga', 'Suami', 'Istri', 'Anak Kandung', 'Cucu', 'Anak Angkat', 'Orang Tua', 'Famili Lain', 'Saudara', 'N/A']);
             $table->enum("status_perkawinan", ['Kawin', 'Belum Kawin', 'Duda', 'Janda']);
-            $table->enum("agama", ['Kristen, Hindu, Budha', 'Islam', 'Konghucu', 'Aliran Kepercayaan Kepada Tuhan YME', 'Aliran Kepercayaan Lainnya', 'N/A']);
+            $table->enum("agama", ['Kristen', 'Hindu', 'Budha', 'Islam', 'Konghucu', 'Aliran Kepercayaan Kepada Tuhan YME', 'Aliran Kepercayaan Lainnya', 'N/A']);
             $table->string("current_address")->nullable();
             $table->enum("golongan_darah", ['A', 'B', 'O', 'AB', 'N/A'])->default('N/A');
             $table->enum("kewarganegaraan", ['WNI', 'WNA']);

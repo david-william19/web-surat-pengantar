@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnggotaKeluarga;
 use App\Models\CapTtdRT;
 use App\Models\CapTtdRW;
 use App\Models\Keluarga;
@@ -9,6 +10,7 @@ use App\Models\RukunTetangga;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class RTController extends Controller
 {

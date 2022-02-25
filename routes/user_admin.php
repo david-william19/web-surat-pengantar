@@ -49,6 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::post('/rt/insertAjax', 'RTAdminController@insertAjax');
     Route::delete('/rt/{id}/delete', 'RTAdminController@deleteAjax');
     Route::get('/rt/manage', 'RTAdminController@viewAdminManage');
+    Route::get('rw/data-keluarga', 'RWAdminController@viewListData');
 
     Route::get('/', 'HomeAdminController@index');
 });

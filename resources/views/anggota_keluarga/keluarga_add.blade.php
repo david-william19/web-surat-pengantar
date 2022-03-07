@@ -59,8 +59,8 @@
                 <div class="form-group">
                   <label for="">Jenis Kelamin</label>
                   <select required class="form-control" name="gender">
-                    <option value="1">Laki-Laki</option>
-                    <option value="2">Perempuan</option>
+                    <option value="laki-laki">Laki-Laki</option>
+                    <option value="perempuan">Perempuan</option>
                   </select>
                 </div>
 
@@ -79,32 +79,154 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">Status dalam keluarga</label>
+                    <select required class="form-control" name="gender">
+                    <option value="Kepala Keluarga">Kepala Keluarga</option>
+                    <option value="Suami">Suami</option>
+                    <option value="Istri">Istri</option>
+                    <option value="Anak Kandung">Anak Kandung</option>
+                    <option value="Cucu">Cucu</option>
+                    <option value="Anak Angkat">Anak Angkat</option>
+                    <option value="Orang Tua">Orang Tu</option>
+                    <option value="Famili Lain">Famili Lain</option>
+                    <option value="Saudara">Saudara</option>
+                  </select>
+                    <small class="form-text text-muted">status dalam keluarga ( Sesuai KK ) </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Status Perkawinan</label>
+                    <select required class="form-control" name="gender">
+                    <option value="Kawin">Kawin</option>
+                    <option value="Belum Kawin">Belum Kawin</option>
+                    <option value="Duda">Duda</option>
+                    <option value="Janda">Janda</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                     <label for="">Agama</label>
-                    <input required type="text" class="form-control" name="agama" 
-                        placeholder="Agama">
+                    <select required class="form-control" name="gender">
+                    <option value="kristen">Kristen</option>
+                    <option value="islam">Islam</option>
+                    <option value="hindu">Hindu</option>
+                    <option value="budha">Buddha</option>
+                    <option value="Konghucu">Konghucu</option>
+                    <option value="Aliran Kepercayaan Kepada Tuhan YME">Aliran Kepercayaan Kepada Tuhan YME</option>
+                    <option value="Aliran Kepercayaan Lainnya">Aliran Kepercayaan Lainnya</option>
+                  </select>
                     <small class="form-text text-muted">Agama ( Sesuai KTP ) </small>
                 </div>
 
                 <div class="form-group">
-                    <label for="">Pendidikan</label>
-                    <input required type="text" class="form-control" name="pendidikan" 
-                        placeholder="Pendidikan">
-                    <small class="form-text text-muted">Pendidikan ( Sesuai KTP ) </small>
+                    <label for="">Golongan Darah</label>
+                    <select required class="form-control" name="gender">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="O">O</option>
+                    <option value="AB">AB</option>
+                  </select>
                 </div>
-
+                
+                <div class="form-group">
+                    <label for="">Kewarganegaraan</label>
+                    <select required class="form-control" name="gender">
+                    <option value="WNI">WNI</option>
+                    <option value="WNA">WNA</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="">Pendidikan</label>
+                    <select required class="form-control" name="gender">
+                        <option value="Belum Masuk TK">Belum Masuk TK</option>
+                        <option value="Sedang PAUD">Sedang PAUD</option>
+                        <option value="Sedang TK">Sedang TK</option>
+                        <option value="Tidak Pernah Sekolah">Tidak Pernah Sekolah</option>
+                        <option value="Sedang SD/Sederajat">Sedang SD/Sederajat</option>
+                        <option value="Tamat SD/Sederajat">Tamat SD/Sederajat</option>
+                        <option value="Sedang SLTP/Sederajat">Sedang SLTP/Sederajat</option>
+                        <option value="Tamat SLTP/Sederajat">Tamat SLTP/Sederajat</option>
+                        <option value="Tamat SLTP/Sederajat">Tamat SLTP/Sederajat</option>
+                        <option value="Sedang SLTA/Sederajat">Sedang SLTA/Sederajat</option>
+                        <option value="Tamat SLTA/Sederajat">Tamat SLTA/Sederajat</option>
+                        <option value="Sedang Kuliah">Sedang Kuliah</option>
+                        <option value="Sedang D1/Sederajat">Sedang D1/Sederajat</option>
+                        <option value="Tamat D1/Sederajat">Tamat D1/Sederajat</option>
+                        <option value="Sedang D2/Sederajat">Sedang D2/Sederajat</option>
+                        <option value="Tamat D2/Sederajat">Tamat D2/Sederajat</option>
+                        <option value="Sedang D3/Sederajat">Sedang D3/Sederajat</option>
+                        <option value="Tamat D3/Sederajat">Tamat D3/Sederajat</option>
+                        <option value="Sedang D4/Sederajat">Sedang D4/Sederajat</option>
+                        <option value="Tamat D4/Sederajat">Tamat D4/Sederajat</option>
+                        <option value="Sedang S1/Sederajat">Sedang S1/Sederajat</option>
+                        <option value="Tamat S1/Sederajat">Tamat S1/Sederajat</option>
+                        <option value="Sedang S2/Sederajat">Sedang S2/Sederajat</option>
+                        <option value="Tamat S2/Sederajat">Tamat S2/Sederajat</option>
+                        <option value="Sedang S3/Sederajat">Sedang S3/Sederajat</option>
+                        <option value="Tamat S3/Sederajat">Tamat S3/Sederajat</option>
+                        <option value="Sedang SLB/Sederajat">Sedang SLB/Sederajat</option>
+                    </select>
+                </div>
+                
                 <div class="form-group">
                     <label for="">Pekerjaan</label>
-                    <input required type="text" class="form-control" name="pekerjaan" 
-                        placeholder="Pekerjaan">
-                    <small class="form-text text-muted">Pekerjaan</small>
-                </div>
-              
-                <div class="form-group">
-                  <label for="">Status Pernikahan</label>
-                  <select required class="form-control" name="status_nikah" id="">
-                    <option value="1">Sudah Menikah</option>
-                    <option value="0">Belum Menikah</option>
-                  </select>
+                    <select required class="form-control" name="gender">
+                    <option value="Petani">Petani</option>
+                    <option value="Buruh">Buruh</option>
+                    <option value="Abdi Puskesmas'">Abdi Puskesmas</option>
+                    <option value="Imam">Imam</option>
+                    <option value="Pegawai Negeri Sipil">Pegawai Negeri Sipil</option>
+                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                    <option value="Penjahit">Penjahit</option>
+                    <option value="Pedagang">Pedagang</option>
+                    <option value="Peternak">Peternak</option>
+                    <option value="Nelayan">Nelayan</option>
+                    <option value="Montir">Montir</option>
+                    <option value="Teknisi">Teknisi</option>
+                    <option value="Dokter">Dokter</option>
+                    <option value="Perawat">Perawat</option>
+                    <option value="Bidan">Bidan</option>
+                    <option value="TNI">TNI</option>
+                    <option value="POLRI">POLRI</option>
+                    <option value="SATPOL PP">SATPOL PP</option>
+                    <option value="Petugas Keamanan">Petugas Keamanan</option>
+                    <option value="Pengusaha kecil, menengah dan besar">Pengusaha kecil, menengah dan besar</option>
+                    <option value="Guru">Guru</option>
+                    <option value="Baby Sitter">Baby Sitter</option>
+                    <option value="Dosen">Dosen</option>
+                    <option value="Seniman/artis">Seniman/artis</option>
+                    <option value="Pedagang Keliling">Pedagang Keliling</option>
+                    <option value="Pengemudi Becak">Pengemudi Becak</option>
+                    <option value="Tukang">Tukang</option>
+                    <option value="Tukang Batu">Tukang Batu</option>
+                    <option value="Tukang Kayu">Tukang Kayu</option>
+                    <option value="Tukang Las">Tukang Las</option>
+                    <option value="Tukang Urut">Tukang Urut</option>
+                    <option value="Tukang Emas">Tukang Emas</option>
+                    <option value="Tukang Bentor">Tukang Bentor</option>
+                    <option value="Pembantu Rumah Tangga">Pembantu Rumah Tangga</option>
+                    <option value="Pengacara">Pengacara</option>
+                    <option value="Notaris">Notaris</option>
+                    <option value="Dukun Tradisional">Dukun Tradisional</option>
+                    <option value="Arsitektur/Desainer">Arsitektur/Desainer</option>
+                    <option value="Karyawan Perusahaan Swasta">Karyawan Perusahaan Swasta</option>
+                    <option value="Karyawan Perusahaan Pemenrintah">Karyawan Perusahaan Pemenrintah</option>
+                    <option value="Pembuat Kue">Pembuat Kue</option>
+                    <option value="Honorer">Honorer</option>
+                    <option value="UKM">UKM</option>
+                    <option value="Wiraswasta">Wiraswasta</option>
+                    <option value="Wirausaha">Wirausaha</option>
+                    <option value="Belum Bekerja">Belum Bekerja</option>
+                    <option value="Tidak Mempunyai Pekerjaan Tetap">Tidak Mempunyai Pekerjaan Tetap</option>
+                    <option value="Pengrajin">Pengrajin</option>
+                    <option value="Pelajar">Pelajar</option>
+                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                    <option value="Pensiunan">Pensiunan</option>
+                    <option value="Supir">Supir</option>
+                    <option value="Pemulung">Pemulung</option>
+                    <option value="Penambang Pasir">Penambang Pasir</option>
+                </select>
                 </div>
 
                 <div class="form-group">

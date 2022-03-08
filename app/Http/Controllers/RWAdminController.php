@@ -281,6 +281,7 @@ class RWAdminController extends Controller
             'Kepala Keluarga' => $statusDKKK,
             'Cucu' => $statusDKC,
             'Anak Angkat' => $statusDKAA,
+            'Saudara' => $statusDKS,
             'N/A' => $statusDKNN
         ];
 

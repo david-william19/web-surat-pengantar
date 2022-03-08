@@ -80,7 +80,7 @@
 
                 <div class="form-group">
                     <label for="">Status dalam keluarga</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="status_dalam_keluarga">
                     <option value="Kepala Keluarga">Kepala Keluarga</option>
                     <option value="Suami">Suami</option>
                     <option value="Istri">Istri</option>
@@ -96,7 +96,7 @@
 
                 <div class="form-group">
                     <label for="">Status Perkawinan</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="status_perkawinan">
                     <option value="Kawin">Kawin</option>
                     <option value="Belum Kawin">Belum Kawin</option>
                     <option value="Duda">Duda</option>
@@ -106,7 +106,7 @@
 
                 <div class="form-group">
                     <label for="">Agama</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="agama">
                     <option value="kristen">Kristen</option>
                     <option value="islam">Islam</option>
                     <option value="hindu">Hindu</option>
@@ -120,7 +120,7 @@
 
                 <div class="form-group">
                     <label for="">Golongan Darah</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="golongan_darah">
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="O">O</option>
@@ -130,7 +130,7 @@
                 
                 <div class="form-group">
                     <label for="">Kewarganegaraan</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="kewarganegaraan">
                     <option value="WNI">WNI</option>
                     <option value="WNA">WNA</option>
                   </select>
@@ -138,7 +138,7 @@
                 
                 <div class="form-group">
                     <label for="">Pendidikan</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="pendidikan">
                         <option value="Belum Masuk TK">Belum Masuk TK</option>
                         <option value="Sedang PAUD">Sedang PAUD</option>
                         <option value="Sedang TK">Sedang TK</option>
@@ -171,7 +171,7 @@
                 
                 <div class="form-group">
                     <label for="">Pekerjaan</label>
-                    <select required class="form-control" name="gender">
+                    <select required class="form-control" name="pekerjaan">
                     <option value="Petani">Petani</option>
                     <option value="Buruh">Buruh</option>
                     <option value="Abdi Puskesmas'">Abdi Puskesmas</option>
@@ -227,6 +227,91 @@
                     <option value="Pemulung">Pemulung</option>
                     <option value="Penambang Pasir">Penambang Pasir</option>
                 </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Akseptor KB</label>
+                    <select required class="form-control" name="akseptor_kb">
+                    <option value="Alat Kontrasepsi Suntik">Alat Kontrasepsi Suntik</option>
+                    <option value="Alat Kontrasepsi Spiral">Alat Kontrasepsi Spiral</option>
+                    <option value="Alat Kontrasepsi Implan">Alat Kontrasepsi Implan</option>
+                    <option value="Alat Kontrasepsi Vasektomi">Alat Kontrasepsi Vasektomi</option>
+                    <option value="Alat Kontrasepsi Tubektomi">Alat Kontrasepsi Tubektomi</option>
+                    <option value="Alat Kontrasepsi Pil">Alat Kontrasepsi Pil</option>
+                    <option value="KB Alamiah/Kalender">KB Alamiah/Kalender</option>
+                    <option value="Alat Kontrasepsi IUD">Alat Kontrasepsi IUD</option>
+                    <option value="Obat Tradisional">Obat Tradisional</option>
+                    <option value="Tidak Menggunakan Alat Kontrasepsi">Tidak Menggunakan Alat Kontrasepsi</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Penyandang Cacat</label>
+                    <select required class="form-control" name="penyandang_cacat">
+                    <option value="Cacat Fisik">Cacat Fisik</option>
+                    <option value="Tuna Rungu">Tuna Rungu</option>
+                    <option value="Tuna Wicara">Tuna Wicara</option>
+                    <option value="Tuna Netra">Tuna Netra</option>
+                    <option value="Lumpuh">Lumpuh</option>
+                    <option value="Sumbing">Sumbing</option>
+                    <option value="Cacat Mental">Cacat Mental</option>
+                    <option value="Disabilitas">Disabilitas</option>
+                    <option value="Autis">Autis</option>
+                    <option value="Stress/Gila">Stress/Gila</option>
+                    <option value="N/A">N/A</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Status Kepemilikan Rumah</label>
+                    <select required class="form-control" name="status_kepemilikan_rumah">
+                    <option value="Milik Sendiri">Milik Sendiri</option>
+                    <option value="Milik Orang Tua">Milik Orang Tua</option>
+                    <option value="Milik Saudara">Milik Saudara</option>
+                    <option value="Sewa/Kontrak">Sewa/Kontrak</option>
+                    <option value="Budel">Budel</option>
+                    <option value="Rumah Dinas Negara">Rumah Dinas Negara</option>
+                    <option value="N/A">N/A</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Penghasilan Perbulan</label>
+                    <select required class="form-control" name="penghasilan_perbulan">
+                    <option value="Dibawah Rp.500.000">Dibawah Rp.500.000</option>
+                    <option value="Rp.500.000-1.000.000">Rp.500.000-1.000.000</option>
+                    <option value="Rp.1.000.000-2.000.000">Rp.1.000.000-2.000.000</option>
+                    <option value="Rp.2.000.000-3.000.000">Rp.2.000.000-3.000.000</option>
+                    <option value="Rp.3.000.000-5.000.000">Rp.3.000.000-5.000.000</option>
+                    <option value="Rp.5.000.000-10.000.000">Rp.5.000.000-10.000.000</option>
+                    <option value="Diatas Rp.10.000.000">Diatas Rp.10.000.000</option>
+                    <option value="Tidak Tetap">Tidak Tetap</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Pengeluaran Perbulan</label>
+                    <select required class="form-control" name="pengeluaran_perbulan">
+                    <option value="<Rp.500.000">Dibawah Rp.500.000</option>
+                    <option value="Rp.500.000-1.000.000">Rp.500.000-1.000.000</option>
+                    <option value="Rp.1.000.000-2.000.000">Rp.1.000.000-2.000.000</option>
+                    <option value="Rp.2.000.000-3.000.000">Rp.2.000.000-3.000.000</option>
+                    <option value="Rp.3.000.000-5.000.000">Rp.3.000.000-5.000.000</option>
+                    <option value="Rp.5.000.000-10.000.000">Rp.5.000.000-10.000.000</option>
+                    <option value="'>Rp.10.000.000'">Diatas Rp.10.000.000</option>
+                    <option value="Tidak Tetap">Tidak Tetap</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Pengeluaran Perbulan</label>
+                    <select required class="form-control" name="kepemilikan_lahan">
+                    <option value="Tidak Memiliki">Tidak Memiliki</option>
+                    <option value="<0,5ha"><0,5ha</option>
+                    <option value="0.5-1.0ha">0.5-1.0ha</option>
+                    <option value=">1.0ha">>1.0ha</option>
+                    <option value="N/A">N/A</option>
+                  </select>
                 </div>
 
                 <div class="form-group">

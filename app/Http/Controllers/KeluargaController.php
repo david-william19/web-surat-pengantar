@@ -206,10 +206,20 @@ class KeluargaController extends Controller
             'gender' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-            'status_nikah' => 'required',
+            'status_dalam_keluarga' => 'required',
+            'status_perkawinan' => 'required',
             'agama' => 'required',
+            'golongan_darah' => 'required',
+            'kewarganegaraan' => 'required',
             'pendidikan' => 'required',
             'pekerjaan' => 'required',
+            'akseptor_kb' => 'required',
+            'penyandang_cacat' => 'required',
+            'status_kepemilikan_rumah' => 'required',
+            'penghasilan_perbulan' => 'required',
+            'pengeluaran_perbulan' => 'required',
+            'kepemilikan_lahan' => 'required',
+            'alamat' => 'required',
         ];
 
         $customMessages = [
@@ -239,13 +249,22 @@ class KeluargaController extends Controller
         $object->nik = $request->nik;
         $object->id_keluarga = $id;
         $object->nama = $request->nama;
-        $object->gender = $request->gender;
+        $object->jenis_kelamin = $request->gender;
         $object->tempat_lahir = $request->tempat_lahir;
         $object->tanggal_lahir = $request->tanggal_lahir;
-        $object->status_perkawinan = $request->status_nikah;
+        $object->status_dalam_keluarga = $request->status_dalam_keluarga;
+        $object->status_perkawinan = $request->status_perkawinan;
         $object->agama = $request->agama;
+        $object->golongan_darah = $request->golongan_darah;
+        $object->kewarganegaraan = $request->kewarganegaraan;
         $object->pendidikan = $request->pendidikan;
         $object->pekerjaan = $request->pekerjaan;
+        $object->akseptor_kb = $request->akseptor_kb;
+        $object->penyandang_cacat = $request->penyandang_cacat;
+        $object->status_kepemilikan_rumah = $request->status_kepemilikan_rumah;
+        $object->penghasilan_perbulan = $request->penghasilan_perbulan;
+        $object->pengeluaran_perbulan = $request->pengeluaran_perbulan;
+        $object->kepemilikan_lahan = $request->kepemilikan_lahan;
         $object->current_address = $request->alamat;
         $object->path_ktp = $photoPath;
 
